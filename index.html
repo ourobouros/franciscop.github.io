@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Francisco Presencia</title>
-    <link href="https://unpkg.com/picnic@6.5.0/picnic.min.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="./style.min.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -16,7 +15,7 @@
           <div class="logo">
             <img src="./img/logo.png" alt="">
           </div>
-          <div class="full three-fifth-500 push-desktop">
+          <div class="push-desktop">
             <h1>Francisco Presencia</h1>
             <p>
               Maker. Programmer.
@@ -25,9 +24,9 @@
             <a class="button contact" disabled data-tooltip="Please wait a couple of seconds">Contact</a>
             <a class="button" href="https://www.patreon.com/franciscop" target="_blank">❤ Donate</a>
           </div>
-          <div class="networks half full-500">
+          <div class="networks half full-600">
             <div>
-              <div class="flex two four-500 two-800">
+              <div class="flex two four-600 two-800">
                 <div>
                   <a href="http://github.com/franciscop/" target="_blank">
                     <img src="./img/icon_github.svg" alt="Github">
@@ -216,12 +215,22 @@
       <!-- <section>
         <h2>Best Experiments</h2>
       </section> -->
+
+      <footer>
+        Logo designed
+          <a href="https://jp.linkedin.com/in/carlaalmazora" target="_blank">by Carla</a>.
+        Website made <a href="https://francisco.io/">by me</a> with
+          <a href="https://picnicss.com/" target="_blank">Picnic CSS</a>
+        and hosted on
+          <a href="https://pages.github.com/" target="_blank">Github Pages</a>.
+
+      </footer>
     </main>
 
     <script>
       const button = document.querySelector('.button.contact');
       setTimeout(() => {
-        button.setAttribute('href', 'mailto:' + 'public@' + window.location.hostname);
+        button.setAttribute('href', 'mailto:' + 'public@' + location.hostname);
         button.removeAttribute('disabled');
         button.removeAttribute('data-tooltip');
         button.disabled = false;

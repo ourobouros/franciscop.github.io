@@ -1,0 +1,25 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "build": "sass style.scss style.min.css --style compressed --sourcemap=none",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "sass --style compressed --sourcemap=none --watch style.scss:style.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franciscop/franciscop.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/franciscop/franciscop.github.io/issues"
+  },
+  "homepage": "https://github.com/franciscop/franciscop.github.io#readme",
+  "dependencies": {
+    "picnic": "^6.5.0"
+  }
+}

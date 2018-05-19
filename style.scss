@@ -1,3 +1,6 @@
+$picnic-grid-gutter: 30px !default;
+@import 'node_modules/picnic/src/picnic';
+
 body {
   background: #faf linear-gradient(160deg, #faf, #88f);
   background-size: cover;
@@ -10,17 +13,13 @@ main {
   margin: 30px auto;
   padding: 30px 10px;
   background: #fff;
-}
 
-@media (min-width: 500px) {
-  main {
+  @media (min-width: 500px) {
     margin: 60px auto;
     padding: 40px 30px;
   }
-}
 
-@media (min-width: 800px) {
-  main {
+  @media (min-width: 800px) {
     margin: 60px auto;
     padding: 60px;
   }
@@ -43,7 +42,7 @@ span[data-tooltip] {
   order: 10;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .push-desktop {
     order: 1;
   }
@@ -64,13 +63,12 @@ span[data-tooltip] {
 .networks > div {
   width: 140px;
   float: right;
-  margin-right: 10px;
+  margin: 0;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .networks > div {
     width: 100%;
-    margin-top: -5px;
     margin-right: 0;
   }
 }
@@ -82,7 +80,7 @@ span[data-tooltip] {
 }
 
 .networks .flex {
-  margin-bottom: -0.6em;
+  margin-bottom: -$picnic-grid-gutter;
 }
 
 .networks img {
@@ -94,7 +92,6 @@ span[data-tooltip] {
 
 .networks a {
   display: block;
-  padding: 10%;
   transition: all .3s ease;
 }
 
@@ -109,15 +106,8 @@ a:hover,
   filter: saturate(10);
 }
 
-@media (min-width: 500px) {
-  .networks img {
-    width: 40px;
-    margin: 5px;
-  }
-}
-
 @keyframes rainbow {
-  0 {
+  0% {
     filter: hue-rotate(0deg);
   }
   100% {
@@ -129,7 +119,6 @@ h1 {
   font-size: 1.5em;
   padding: 0;
   line-height: 1;
-  margin: 5px 0 0;
 }
 
 h2 {
@@ -162,7 +151,6 @@ header .button {
 }
 
 h3 {
-  margin-top: 6px;
   padding: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -175,7 +163,7 @@ h3 {
 
 .product {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 #products h2 {
@@ -195,12 +183,12 @@ h3 {
   padding: 0;
   margin: 0;
   top: 0;
-  left: 55px;
+  left: 72px;
   color: #fff;
 }
 
 .browser {
-  width: 95%;
+  width: 98%;
   background: #0074d9;
   overflow: hidden;
   padding-top: 20px;
@@ -227,7 +215,7 @@ h3 {
 }
 
 .mobile {
-  width: 30%;
+  width: 25%;
   border-radius: 2px;
   position: absolute;
   right: 0;
@@ -256,4 +244,9 @@ h3 {
   padding: 2px 6px;
   margin: 4px 0 0 5px;
   border-radius: 3px;
+}
+
+
+footer {
+  margin-top: 100px;
 }
