@@ -1,0 +1,259 @@
+body {
+  background: #faf linear-gradient(160deg, #faf, #88f);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+main {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px 10px;
+  background: #fff;
+}
+
+@media (min-width: 500px) {
+  main {
+    margin: 60px auto;
+    padding: 40px 30px;
+  }
+}
+
+@media (min-width: 800px) {
+  main {
+    margin: 60px auto;
+    padding: 60px;
+  }
+}
+
+header {
+  margin-bottom: 10px;
+}
+
+header > .flex {
+  justify-content: space-between;
+}
+
+span[data-tooltip] {
+  border-bottom: 2px solid #eee;
+  cursor: help;
+}
+
+.push-desktop {
+  order: 10;
+}
+
+@media (min-width: 500px) {
+  .push-desktop {
+    order: 1;
+  }
+}
+
+.logo,
+.networks {
+  order: 1;
+  flex-grow: 0;
+}
+
+.logo img {
+  width: 100%;
+  max-width: 120px;
+  display: block;
+}
+
+.networks > div {
+  width: 140px;
+  float: right;
+  margin-right: 10px;
+}
+
+@media (min-width: 500px) {
+  .networks > div {
+    width: 100%;
+    margin-top: -5px;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .networks {
+    width: 140px;
+  }
+}
+
+.networks .flex {
+  margin-bottom: -0.6em;
+}
+
+.networks img {
+  width: 40px;
+  display: block;
+  margin: 0 auto;
+  transition: all .3s ease;
+}
+
+.networks a {
+  display: block;
+  padding: 10%;
+  transition: all .3s ease;
+}
+
+a:hover,
+.button:hover,
+.networks a:hover {
+  cursor: pointer;
+  animation: rainbow 1s linear infinite;
+}
+
+.networks a:hover img {
+  filter: saturate(10);
+}
+
+@media (min-width: 500px) {
+  .networks img {
+    width: 40px;
+    margin: 5px;
+  }
+}
+
+@keyframes rainbow {
+  0 {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+h1 {
+  font-size: 1.5em;
+  padding: 0;
+  line-height: 1;
+  margin: 5px 0 0;
+}
+
+h2 {
+  padding: 40px 0 0;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+p {
+  margin: 0;
+}
+
+header p {
+  margin: 8px 0;
+}
+
+header .button {
+  margin: 0;
+}
+
+@media (min-width: 500px) {
+  h1 {
+    font-size: 2em;
+  }
+  header p {
+    font-size: 1.1em;
+  }
+}
+
+h3 {
+  margin-top: 6px;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+.product {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+#products h2 {
+  margin-bottom: 10px;
+}
+
+.product img {
+  width: 100%;
+  display: block;
+}
+
+.product h3 {
+  line-height: 20px;
+  font-size: .7em;
+  text-transform: uppercase;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 55px;
+  color: #fff;
+}
+
+.browser {
+  width: 95%;
+  background: #0074d9;
+  overflow: hidden;
+  padding-top: 20px;
+  border-radius: 3px 3px 6px 6px;
+  box-shadow: 1px 1px 20px -5px rgba(0, 0, 0, .5);
+  position: relative;
+}
+
+.browser::before,
+.browser::after {
+  position: absolute;
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: #f55;
+  top: 6px;
+  left: 8px;
+  border-radius: 50%;
+}
+
+.browser::after {
+  left: 24px;
+  background: #3d3;
+}
+
+.mobile {
+  width: 30%;
+  border-radius: 2px;
+  position: absolute;
+  right: 0;
+  top: 18px;
+  border: 2px solid #333;
+  border-width: 2px 2px 14px 2px;
+}
+
+.mobile::before {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  bottom: -10px;
+  left: calc(50% - 3px);
+  border-radius: 50%;
+}
+
+
+.views,
+.stars {
+  float: right;
+  font-size: .8rem;
+  border: 1px solid #ccc;
+  padding: 2px 6px;
+  margin: 4px 0 0 5px;
+  border-radius: 3px;
+}
