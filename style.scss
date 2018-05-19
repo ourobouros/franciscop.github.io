@@ -233,24 +233,32 @@ header {
 
 .browser {
   width: 98%;
-  background: #0074d9;
-  overflow: hidden;
-  padding-top: 20px;
+  // background: #0074d9;
+  // overflow: hidden;
+  // padding-top: 20px;
+  border: 0px solid #0074d9;
+  border-width: 20px 0 0 0;
   border-radius: 3px 3px 6px 6px;
   box-shadow: 1px 1px 20px -5px rgba(0, 0, 0, .5);
   position: relative;
+  min-height: 50px;
+
+  img {
+    border-radius: 0 0 6px 6px;
+  }
 }
 
 .browser::before,
 .browser::after {
-  position: absolute;
   content: "";
+  position: absolute;
   width: 9px;
   height: 9px;
   background: #f55;
-  top: 6px;
+  top: -15px;
   left: 8px;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .browser::after {
@@ -259,13 +267,15 @@ header {
 }
 
 .mobile {
-  width: 25%;
+  width: 26%;
   border-radius: 2px;
   position: absolute;
   right: 0;
   top: 18px;
   border: 2px solid #333;
   border-width: 2px 2px 14px 2px;
+  box-shadow: 1px 1px 20px -5px rgba(0, 0, 0, .5);
+  min-height: 50px;
 }
 
 .mobile::before {
