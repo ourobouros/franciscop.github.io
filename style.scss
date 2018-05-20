@@ -32,6 +32,10 @@ p {
   margin: 0;
 }
 
+h2 + p {
+  margin: .3em 0;
+}
+
 span[data-tooltip] {
   border-bottom: 2px solid #eee;
   cursor: help;
@@ -196,8 +200,9 @@ header {
 // PRODUCTS
 
 #products {
+  margin-top: 20px;
 
-  h2 {
+  p {
     margin-bottom: 10px;
   }
 
@@ -236,7 +241,7 @@ header {
   // background: #0074d9;
   // overflow: hidden;
   // padding-top: 20px;
-  border: 0px solid #0074d9;
+  border: 0px solid #333;
   border-width: 20px 0 0 0;
   border-radius: 3px 3px 6px 6px;
   box-shadow: 1px 1px 20px -5px rgba(0, 0, 0, .5);
