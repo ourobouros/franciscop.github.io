@@ -30,10 +30,19 @@ h3 {
 
 p {
   margin: 0;
+  line-height: 1.4;
 }
 
 h2 + p {
-  margin: .3em 0;
+  margin: .3em 0 .6em;
+}
+
+p br {
+  margin: 0 0 20px 0;
+
+  @media (min-width: 800px) {
+    display: none;
+  }
 }
 
 span[data-tooltip] {
@@ -119,7 +128,9 @@ footer {
 // HEADER
 
 header {
-  margin: 20px 0;
+  @media (min-width: 800px) {
+    margin: 20px 0;
+  }
 
   p {
     margin: 8px 0;
