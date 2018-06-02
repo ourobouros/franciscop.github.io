@@ -42,9 +42,9 @@
             <p>
               Maker. Programmer.
               <span data-tooltip="Writer (from Spain)">Escritor.</span>
-              <span data-tooltip="Designer (learning Japanese)">デザイナー。</span></p>
-            <a class="button contact" disabled data-tooltip="Please wait a couple of seconds">😄 Contact</a>
-            <!-- <a class="button" href="https://www.patreon.com/franciscop" target="_blank">❤ Donate</a> -->
+              <span data-tooltip="Designer (learning Japanese)">デザイナー。</span>
+            </p>
+            <a class="button contact" disabled title="Please wait a couple of seconds">Contact</a>
           </div>
           <div class="networks half full-600">
             <div class="logos">
@@ -65,8 +65,8 @@
                   </a>
                 </div>
                 <div>
-                  <a href="https://www.patreon.com/franciscop" target="_blank">
-                    <img src="./img/icon_patreon.svg" alt="Instagram">
+                  <a href="https://twitter.com/fpresencia" target="_blank">
+                    <img src="./img/icon_twitter.svg" alt="Paypal">
                   </a>
                 </div>
               </div>
@@ -200,34 +200,34 @@
             <a href="https://github.com/franciscop" target="_blank">many repositories</a>,
             I think these are some of my best repos:
         </p>
-        <div class="flex one two-500 three-800">
+        <div class="repos flex one two-500 three-800">
           <div>
             <a href="https://github.com/franciscop/server" target="_blank">
-              <h3><span class="stars">⭐ 3.1k</span> <code>server</code></h3>
+              <h3><span class="stars">⭐ 3.2k</span> <code>server</code></h3>
             </a>
             <p>Powerful and secure server for Node.js with websockets</p>
           </div>
           <div>
             <a href="https://github.com/franciscop/drive-db" target="_blank">
-              <h3><span class="stars">⭐ 488</span> <code>drive-db</code></h3>
+              <h3><span class="stars">⭐ 500</span> <code>drive-db</code></h3>
             </a>
             <p>Google Drive Spreadsheets as your local database</p>
           </div>
           <div>
             <a href="https://github.com/franciscop/legally" target="_blank">
-              <h3><span class="stars">⭐ 175</span> <code>legally</code></h3>
+              <h3><span class="stars">⭐ 180</span> <code>legally</code></h3>
             </a>
             <p>Check the licenses of npm dependency tree</p>
           </div>
           <div>
             <a href="https://github.com/franciscop/translate" target="_blank">
-              <h3><span class="stars">⭐ 11</span> <code>translate</code></h3>
+              <h3><span class="stars">⭐ 12</span> <code>translate</code></h3>
             </a>
             <p>Translate text on node.js and the browser with promises </p>
           </div>
           <div>
             <a href="https://github.com/franciscop/superdom" target="_blank">
-              <h3><span class="stars">⭐ 309</span> <code>superdom</code></h3>
+              <h3><span class="stars">⭐ 311</span> <code>superdom</code></h3>
             </a>
             <p>Better ES6 DOM manipulation, an experiment gone wild.</p>
           </div>
@@ -256,13 +256,26 @@
     </main>
 
     <script>
-      const button = document.querySelector('.button.contact');
+      // Enable the contact button with my email that includes the domain
       setTimeout(() => {
+        const button = document.querySelector('.button.contact');
         button.setAttribute('href', 'mailto:' + 'public@' + location.hostname);
         button.removeAttribute('disabled');
-        button.removeAttribute('data-tooltip');
+        button.removeAttribute('title');
         button.disabled = false;
       }, 2000 * parseInt(Math.random()) + 1000);
+
+      // Round the number like "3.5k" https://stackoverflow.com/a/9461657/938236
+      const round = num => num > 999 ? (num / 1000).toFixed(1) + 'k' : num
+
+      // Add the most current star count to the repositories
+      querySelectorAll('.repos a').forEach(async link => {
+        const name = link.getAttribute('href').split('/').slice(-2).join('/');
+        const url = 'https://api.github.com/repos/' + name;
+        const data = await fetch(url).then(res => res.json());
+        if (!data || !data.stargazers_count) return;
+        link.querySelector('.stars').innerText = '⭐ ' + round(data.stargazers_count);
+      });
     </script>
 
     <script>

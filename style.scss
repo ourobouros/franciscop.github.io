@@ -48,6 +48,16 @@ p br {
 span[data-tooltip] {
   border-bottom: 2px solid #eee;
   cursor: help;
+
+  &::before,
+  &::after {
+    left: auto;
+    right: 0;
+  }
+
+  &::before {
+    right: 12px;
+  }
 }
 
 .push-desktop {
@@ -151,6 +161,21 @@ header {
 
   .button {
     margin: 0;
+  }
+
+  .button {
+    &::before {
+      display: inline-block;
+      width: 15px;
+      margin-right: 10px;
+      content: "🙂";
+    }
+    &[disabled]::before {
+      content: "🤔";
+    }
+    &:hover::before {
+      content: "🤗";
+    }
   }
 
   .flex {
