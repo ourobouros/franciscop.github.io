@@ -3,6 +3,8 @@ const { start } = require("live-server");
 const { basename } = require('path');
 const marked = require('marked');
 const hbs = require('handlebars');
+const sass = require('node-sass');
+const watch = require('node-watch');
 const fm = require('front-matter');
 const { abs, dir, exists, join, read, stat, write } = require('fs-array');
 
@@ -22,38 +24,43 @@ const parseData = (folder, i, blog) => {
   return { ...attributes, file, folder, body: marked(body), blog };
 }
 
+const filter = /\.(sass|scss|hbs|md)$/;
+watch(__dirname, { recursive: true, filter }, (err, file) => {
+  const folder = join(__dirname, 'blog');
+
+  // Handlebars import all '_name.hbs' in the blog folder as partials
+  dir(folder).filter(isPartial).map(getName).forEach(([name, src]) => {
+    hbs.registerPartial(name, src);
+  });
+
+  // Create the main handlebars template
+  const template = hbs.compile(read(join(folder, 'post.hbs')));
+
+  // Actual markdown
+  const blog = dir(folder).filter(hasReadme).map(parseData);
+  blog.forEach(data => write(join(data.folder, 'index.html'), template(data)));
+
+  // Render the main index.hbs
+  const index = join(folder, 'index.hbs');
+  if (exists(index)) {
+    write(join(folder, 'index.html'), hbs.compile(read(index))({ blog }));
+  }
+
+  const style = join(__dirname, 'style.scss');
+  if (exists(style)) {
+    const options = { file: style, outputStyle: 'compressed' };
+    write(join(__dirname, 'style.min.css'), sass.renderSync(options).css.toString());
+  }
+});
 
 
 const params = {
   port: 3000, // Set the server port. Defaults to 8080.
   host: "localhost", // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
   open: true, // When false, it won't load your browser by default.
-  ignore: '.min.css,.min.js,*.html', // comma-separated string for paths to ignore
-  wait: 1000, // Waits for all changes, before reloading. Defaults to 0 sec. Good for the build process
-  middleware: [(req, res, next) => {
-
-    const folder = join(__dirname, 'blog');
-
-    // Handlebars import all '_name.hbs' in the blog folder as partials
-    dir(folder).filter(isPartial).map(getName).forEach(([name, src]) => {
-      hbs.registerPartial(name, src);
-    });
-
-    // Create the main handlebars template
-    const template = hbs.compile(read(join(folder, 'post.hbs')));
-
-    // Actual markdown
-    const blog = dir(folder).filter(hasReadme).map(parseData);
-    blog.forEach(data => write(join(data.folder, 'index.html'), template(data)));
-
-    // Render the main index.hbs
-    const index = join(folder, 'index.hbs');
-    if (exists(index)) {
-      write(join(folder, 'index.html'), hbs.compile(read(index))({ blog }));
-    }
-
-    next();
-  }] // Takes an array of Connect-compatible middleware that are injected into the server middleware stack
+  // ignore: '.sass-cache,node_modules,scss,sass,hbs,md', // comma-separated string for paths to ignore
+  // wait: 1000, // Waits for all changes, before reloading. Defaults to 0 sec. Good for the build process
+  middleware: [(req,res,next) => setTimeout(next, 100)]
 };
 
 start(params);

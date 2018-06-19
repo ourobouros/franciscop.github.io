@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "My personal website",
   "scripts": {
-    "build": "sass style.scss style.min.css --style compressed --sourcemap=none",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "sass --style compressed --sourcemap=none --watch style.scss:style.min.css"
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,8 @@
     "fs-array": "^1.0.0",
     "handlebars": "^4.0.11",
     "live-server": "^1.2.0",
-    "marked": "^0.4.0"
+    "marked": "^0.4.0",
+    "node-sass": "^4.9.0",
+    "node-watch": "^0.5.8"
   }
 }
