@@ -6,7 +6,7 @@ const hbs = require('handlebars');
 const sass = require('node-sass');
 const watch = require('node-watch');
 const fm = require('front-matter');
-const { abs, dir, exists, join, read, stat, write } = require('fs-array');
+const { abs, dir, exists, join, read, stat, walk, write } = require('fs-array');
 
 // Check if a full src file is a handlebars template or not
 const isPartial = src => /^_[\w_]+\.hbs$/.test(basename(src));
@@ -24,8 +24,10 @@ const parseData = (folder, i, blog) => {
   return { ...attributes, file, folder, body: marked(body), blog };
 }
 
+const ignore = /(node_modules|\.git|\.sass-cache)/;
 const filter = /\.(sass|scss|hbs|md)$/;
 watch(__dirname, { recursive: true, filter }, (err, file) => {
+  const walked = walk(__dirname).filter(src => !ignore.test(src));
   const folder = join(__dirname, 'blog');
 
   // Handlebars import all '_name.hbs' in the blog folder as partials
@@ -46,10 +48,15 @@ watch(__dirname, { recursive: true, filter }, (err, file) => {
     write(join(folder, 'index.html'), hbs.compile(read(index))({ blog }));
   }
 
-  const style = join(__dirname, 'style.scss');
-  if (exists(style)) {
-    const options = { file: style, outputStyle: 'compressed' };
-    write(join(__dirname, 'style.min.css'), sass.renderSync(options).css.toString());
+  // The SASS or SCSS is being modified, rebuild them all
+  if (/\.s(a|c)ss$/.test(file)) {
+    // Only main scss that are not partials (ignore "_name.scss" )
+    walked.filter(src => /^[^_].+\.s(a|c)ss$/.test(src.split('/').pop())).forEach(style => {
+      console.log('Change:', style);
+      const options = { file: style, outputStyle: 'compressed' };
+      const output = style.replace(/\.s(a|c)ss$/, '.min.css');
+      write(output, sass.renderSync(options).css.toString());
+    });
   }
 });
 
