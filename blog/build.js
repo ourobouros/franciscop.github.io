@@ -1,55 +1,47 @@
+const { basename } = require('path');
 const marked = require('marked');
 const hbs = require('handlebars');
+const fm = require('front-matter');
+const { abs, dir, exists, join, read, stat, write } = require('fs-array');
 
-const prom = require('util').promisify;
-const fs = Object.entries(require('fs'))
-  .filter(pair => typeof pair[1] === 'function')
-  .reduce((fs, [key, fn]) => ({ ...fs, [key]: prom(fn) }), {});
+// Check if a full src file is a handlebars template or not
+const isPartial = src => /^_[\w_]+\.hbs$/.test(basename(src));
 
-// https://gist.github.com/mathewbyrne/1280286
-const slugify = text => text.toString().toLowerCase()
-  .replace(/\s+/g, '-')           // Replace spaces with -
-  .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-  .replace(/\-\-+/g, '-');        // Replace multiple - with single
+// Find the name and content pair for the handlebars template
+const getName = src => [basename(src, '.hbs').slice(1), read(src)];
 
-const getPostInfo = async file => {
-  const post = {};
-  let body = await fs.readFile(file, 'utf-8');
-  const parts = body.split(/^---$/m).map(a => a.trim());
-  if (parts && parts[0] === '' && parts.length >= 3) {
-    const extra = parts[1];
-    extra.split(/\n/).map(a => a.trim()).filter(a => a).forEach(bit => {
-      const [name, ...rest] = bit.split(':');
-      const content = rest.join(':').trim();
-      if (name === 'title') post.slug = slugify(content);
-      post[name.trim()] = content;
-    });
+// Check whether a folder has a 'readme.md' file or not
+const hasReadme = src => exists(join(src, 'readme.md'));
 
-    // Recover it, since this is valid markdown
-    post.body = parts.slice(2).join('---');
-  }
-  return post;
-};
+// Find all the relevant data for a blog post entry (a folder)
+const parseData = (folder, i, blog) => {
+  const file = join(folder, 'readme.md');
+  const { attributes, body } = fm(read(file));
+  return { ...attributes, file, folder, body: marked(body), blog };
+}
 
-(async () => {
-  const all = await fs.readdir('./');
 
-  // Handlebars
-  const template = await fs.readFile('./post.hbs', 'utf-8');
-  await Promise.all(all.filter(it => /^_(\w+)\.hbs/.test(it))
-    .map(it => it.replace(/^_(\w+)\.hbs/, (a, good) => good))
-    .map(async name => {
-      hbs.registerPartial(name, await fs.readFile(`./_${name}.hbs`, 'utf-8'));
-    }));
 
-  // Actual markdown
-  const entries = all.filter(it => /\.md$/.test(it));
-  const blog = await Promise.all(entries.map(getPostInfo));
-  blog.forEach(entry => {
-    blog.html = hbs.compile(template)({ blog, ...entry, body: marked(entry.body) });
-    fs.mkdir(entry.slug).catch(noproblem => {});  // Already exists == ignore it
-    fs.writeFile(entry.slug + '/index.html', blog.html);
+// Main initialization script
+module.exports = (folder = 'blog') => {
+
+  // Handlebars import all '_name.hbs' in the blog folder as partials
+  dir(folder).filter(isPartial).map(getName).forEach(([name, src]) => {
+    hbs.registerPartial(name, src);
   });
 
-  console.log(blog);
-})();
+  // Create the main handlebars template
+  const template = hbs.compile(read(join(folder, 'post.hbs')));
+
+  // Actual markdown
+  const blog = dir(folder).filter(hasReadme).map(parseData);
+  blog.forEach(data => write(join(data.folder, 'index.html'), template(data)));
+
+  // Render the main index.hbs
+  const index = join(folder, 'index.hbs');
+  if (exists(index)) {
+    write(join(folder, 'index.html'), hbs.compile(read(index))({ blog }));
+  }
+};
+
+module.exports();
