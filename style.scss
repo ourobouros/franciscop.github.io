@@ -29,12 +29,15 @@ h3 {
 }
 
 p {
-  margin: 0;
   line-height: 1.4;
 }
 
 h2 + p {
   margin: .4em 0 .9em;
+}
+
+.flex p {
+  margin: 0;
 }
 
 p br {
@@ -109,7 +112,8 @@ body {
   background-attachment: fixed;
 }
 
-main {
+main,
+article {
   width: 100%;
   max-width: 900px;
   margin: 30px auto;
