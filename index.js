@@ -33,7 +33,9 @@ const parseData = (file, i, blog) => {
 }
 
 // Folders to ignore
-const ignore = src => !/(node_modules|\.git|\.sass-cache)/.test(src);
+const ignoredFiles = read('.gitignore').split(/\n/).filter(a => a).filter(a => !/^\#/.test(a));
+const gitignore = require('ignore')().add([...ignoredFiles, '.git']);
+const ignore = src => !gitignore.ignores(src);
 
 // Extensions to handle to changes
 const filter = /\.(sass|scss|hbs|md|js)$/;
