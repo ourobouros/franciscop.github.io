@@ -4,27 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ES7 Exporting Trick</title>
+  <title>Francisco's Blog!</title>
   <link rel="stylesheet" href="/style.min.css">
-  <link rel="stylesheet" href="/blog/style.min.css">
+  <link rel="stylesheet" href="/demo/preload/style.min.css">
 </head>
 <body>
   <main>
     <h1>Francisco's Blog</h1>
     {{#each blog}}
-      <a href="/blog/{{this.id}}">
+      <a href="/blog/{{this.id}}/">
         <h2>{{this.title}}</h2>
-        <time datetime="{{this.date}}"></time>
+        <time datetime="{{this.date}}">{{this.date}}</time>
       </a>
     {{/each}}
   </main>
-  <script type="text/javascript" src="https://unpkg.com/instantclick@3.1.0-2/dist/instantclick.js" data-no-instant></script>
-  <script data-no-instant>InstantClick.init();</script>
-  <script src="https://unpkg.com/moment@2.22.2/min/moment.min.js" charset="utf-8" data-no-instant></script>
-  <script type="text/javascript" data-no-instant>
+  <!-- <script type="text/javascript" src="https://unpkg.com/instantclick@3.1.0-2/dist/instantclick.js" data-no-instant></script>
+  <script>InstantClick.init();</script> -->
+  <script src="https://unpkg.com/moment@2.22.2/min/moment.min.js" data-once></script>
+  <script src="https://unpkg.com/tiny-lru@1.6.1/lib/tiny-lru.js" data-once></script>
+  <script src="/demo/preload/index.js" data-once></script>
+  <script type="text/javascript">
     document.querySelectorAll('[datetime]').forEach(el => {
       el.innerHTML = moment(el.getAttribute('datetime')).fromNow();
     });
+    // preloader.open('/blog/es7-exporting-trick/');
   </script>
 </body>
 </html>

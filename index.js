@@ -22,7 +22,7 @@ const parseData = (file, i, blog) => {
   const { attributes, body } = fm(read(file));
   if (!attributes.layout) return;
   return {
-    id: folder.split('/').pop(),
+    id: folder.split('/').slice(-2).shift(),
     file,
     folder,
     ...attributes,
