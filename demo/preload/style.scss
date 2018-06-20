@@ -1,5 +1,15 @@
-a[data-cached] {
-  background: red!important;
+[data-cached]::after {
+  content: 'cached!';
+  position: absolute;
+  font-size: 0.6em;
+  margin-left: 5px;
+  margin-top: 3px;
+  background: #ddd;
+  border-radius: 3px;
+  padding: 2px 5px;
+  vertical-align: middle;
+  background: red;
+  color: #fff;
 }
 
 // $preload-bar: 4px;

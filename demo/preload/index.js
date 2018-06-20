@@ -27,7 +27,6 @@ const loaded = {};
 
 
 const setLinks = () => {
-  console.log('Setting Link');
   const links = Object.keys(cache.cache);
   document.querySelectorAll('a').forEach(link => {
     // console.log(links, link.href);
@@ -126,6 +125,12 @@ const load = ref => {
 
 // Set the new content to whatever it is passed
 const replaceContent = ({ href, html }) => {
+  // URL & History
+  // This has to be before the DOM manipulations, otherwise the browser might
+  //   think that the data is the old one
+  const stateObj = { foo: "bar" };
+  history.replaceState({}, "", href);
+
   // Generate a "virtual dom" (no, not your React virtual dom)
   const dom = document.createElement("html");
   dom.innerHTML = html;
@@ -143,10 +148,6 @@ const replaceContent = ({ href, html }) => {
   // [...dom.querySelector('head').children].forEach(node => {
   //   head.appendChild(node);
   // });
-
-  // URL & History
-  const stateObj = { foo: "bar" };
-  history.replaceState({}, "", href);
 
   // Load scripts
   const scripts = [...body.querySelectorAll('script')];
