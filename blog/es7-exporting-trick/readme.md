@@ -1,6 +1,7 @@
 ---
+layout: post
 title: ES7 Exporting Trick
-date: 2014-10-18 12:58:29
+date: 2018-06-19 20:00
 categories: jekyll mini clone
 ---
 

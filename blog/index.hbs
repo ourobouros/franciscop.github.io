@@ -9,10 +9,22 @@
   <link rel="stylesheet" href="/blog/style.min.css">
 </head>
 <body>
-  <article>
-    Blabla
-  </article>
+  <main>
+    <h1>Francisco's Blog</h1>
+    {{#each blog}}
+      <a href="/blog/{{this.id}}">
+        <h2>{{this.title}}</h2>
+        <time datetime="{{this.date}}"></time>
+      </a>
+    {{/each}}
+  </main>
   <script type="text/javascript" src="https://unpkg.com/instantclick@3.1.0-2/dist/instantclick.js" data-no-instant></script>
   <script data-no-instant>InstantClick.init();</script>
+  <script src="https://unpkg.com/moment@2.22.2/min/moment.min.js" charset="utf-8" data-no-instant></script>
+  <script type="text/javascript" data-no-instant>
+    document.querySelectorAll('[datetime]').forEach(el => {
+      el.innerHTML = moment(el.getAttribute('datetime')).fromNow();
+    });
+  </script>
 </body>
 </html>
