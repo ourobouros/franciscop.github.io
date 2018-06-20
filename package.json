@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "front-matter": "^2.3.0",
-    "fs-array": "^1.1.1",
+    "fs-array": "^1.2.0",
     "handlebars": "^4.0.11",
     "live-server": "^1.2.0",
     "marked": "^0.4.0",
