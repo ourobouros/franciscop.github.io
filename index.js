@@ -30,12 +30,12 @@ const parseData = (file, i, blog) => {
     template: hbs.compile(`{{> ${attributes.layout}}}`),
     body: marked(body)
   };
-}
+};
 
 // Folders to ignore
-const ignoredFiles = read('.gitignore').split(/\n/).filter(a => a).filter(a => !/^\#/.test(a));
-const gitignore = require('ignore')().add([...ignoredFiles, '.git']);
-const ignore = src => !gitignore.ignores(src);
+const svc = require('ignore')().add('.git');
+if (exists('.gitignore')) svc.add(read('.gitignore'));
+const ignore = src => !svc.ignores(src);
 
 // Extensions to handle to changes
 const filter = /\.(sass|scss|hbs|md|js)$/;
