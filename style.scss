@@ -82,6 +82,10 @@ span[data-tooltip] {
 
 
 // LINK RAINBOW
+a {
+  display: inline-block;
+}
+
 a:hover {
   cursor: pointer;
   animation: rainbow 1s linear infinite;

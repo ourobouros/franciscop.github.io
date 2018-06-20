@@ -13,10 +13,33 @@ cache.set(window.location.href, {
   href: window.location.href,
   html: document.querySelector('html').outerHTML
 });
-console.log(cache.ttl, cache.max);
+
+cache.notify = true;
+cache.onchange = (event, serializedCache) => {
+  if (event !== 'remove' && event !== 'set') return;
+  setLinks(Object.keys(JSON.parse(serializedCache).cache));
+};
 
 // These are already executed and should not be executed again
 const loaded = {};
+
+
+
+
+const setLinks = () => {
+  console.log('Setting Link');
+  const links = Object.keys(cache.cache);
+  document.querySelectorAll('a').forEach(link => {
+    // console.log(links, link.href);
+    if (links.includes(link.href)) {
+      if (link.getAttribute('data-cached')) return;
+      return link.setAttribute('data-cached', true);
+    } else {
+      if (link.getAttribute('data-cached')) return;
+      link.removeAttribute('data-cached');
+    }
+  });
+};
 
 
 const bar = {
@@ -75,9 +98,12 @@ const preload = (ref) => {
   // console.log('Preloading:', href);
   loader[href] = fetch(href).then(res => res.text()).then(html => {
     cache.set(href, { href, html });
+    setLinks([href]);
     delete loader[href];
     return cache.get(href);
   });
+
+  setLinks();
   return loader[href];
 };
 
@@ -135,6 +161,9 @@ const replaceContent = ({ href, html }) => {
     // Reattach the links
     attach();
 
+    // Set the webpage link attr to reflect the current website
+    setLinks();
+
     // Hide the loading bar
     bar.hide();
   });
@@ -151,6 +180,7 @@ const attach = (links = 'a') => {
     if (link.host !== location.host) return;
 
     link.addEventListener('mouseover', e => preload(e.currentTarget));
+    link.addEventListener('touchstart', e => preload(e.currentTarget));
     link.addEventListener('click', e => {
       e.preventDefault();
       load(e.currentTarget);
