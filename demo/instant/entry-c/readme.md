@@ -1,11 +1,11 @@
 ---
 layout: post
-title: ES7 Exporting Trick
+title: Entry C
 date: 2018-06-19 20:00
 categories: jekyll mini clone
 ---
 
-# ES7 Exporting Trick
+# Entry C
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 

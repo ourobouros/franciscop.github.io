@@ -7,17 +7,12 @@ const loader = {};
 const cache = lru();
 
 // Cache for 100 seconds (or browser refresh)
-cache.expire = 100000;
-
-cache.set(window.location.href, {
-  href: window.location.href,
-  html: document.querySelector('html').outerHTML
-});
+cache.expire = 10000;
 
 cache.notify = true;
 cache.onchange = (event, serializedCache) => {
   if (event !== 'remove' && event !== 'set') return;
-  setLinks(Object.keys(JSON.parse(serializedCache).cache));
+  setLinks();
 };
 
 // These are already executed and should not be executed again
@@ -34,7 +29,7 @@ const setLinks = () => {
       if (link.getAttribute('data-cached')) return;
       return link.setAttribute('data-cached', true);
     } else {
-      if (link.getAttribute('data-cached')) return;
+      if (!link.getAttribute('data-cached')) return;
       link.removeAttribute('data-cached');
     }
   });
@@ -66,11 +61,11 @@ const inject = (scr, body) => new Promise((resolve, reject) => {
   }
 
   const script = document.createElement("script");
-  script.addEventListener('load', resolve);
-  script.addEventListener('error', reject);
 
   // https://www.danielcrabtree.com/blog/25/gotchas-with-dynamically-adding-script-tags-to-html
   if (scr.src) {
+    script.addEventListener('load', resolve);
+    script.addEventListener('error', reject);
     // Cannot wrap this unfortunately ¯\_(ツ)_/¯
     script.src = scr.src;
     return body.appendChild(script);
@@ -78,8 +73,9 @@ const inject = (scr, body) => new Promise((resolve, reject) => {
 
   // Script just has a string
   // Wrap it in a new context to avoid globals being re-assigned
-  const wrapped = `(() => {${scr.innerText}})()`;
+  const wrapped = `(() => {${scr.innerHTML}})();`;
   script.appendChild(document.createTextNode(wrapped));
+  body.appendChild(script);
   resolve();
 });
 
@@ -97,7 +93,7 @@ const preload = (ref) => {
   // console.log('Preloading:', href);
   loader[href] = fetch(href).then(res => res.text()).then(html => {
     cache.set(href, { href, html });
-    setLinks([href]);
+    setLinks();
     delete loader[href];
     return cache.get(href);
   });
@@ -128,8 +124,7 @@ const replaceContent = ({ href, html }) => {
   // URL & History
   // This has to be before the DOM manipulations, otherwise the browser might
   //   think that the data is the old one
-  const stateObj = { foo: "bar" };
-  history.replaceState({}, "", href);
+  history.pushState({ href }, "", href);
 
   // Generate a "virtual dom" (no, not your React virtual dom)
   const dom = document.createElement("html");
@@ -150,7 +145,7 @@ const replaceContent = ({ href, html }) => {
   // });
 
   // Load scripts
-  const scripts = [...body.querySelectorAll('script')];
+  const scripts = [...document.querySelectorAll('script')];
 
   // Recursive iteration over the scripts when they have finished loading
   function flipScript ([current, ...scripts]) {
@@ -193,5 +188,19 @@ const pwa = () => {
   document.querySelectorAll('a').forEach(preload);
 };
 
+window.onpopstate = function(e) {
+  const href = e.currentTarget.location.href;
+  load(href);
+};
 
-attach();
+// without jQuery (doesn't work in older IEs)
+document.addEventListener('DOMContentLoaded', function(){
+
+  // This needs to be here so that any script loaded a posteriori is also added
+  cache.set(window.location.href, {
+    href: window.location.href,
+    html: document.querySelector('html').outerHTML
+  });
+
+  attach();
+}, false);

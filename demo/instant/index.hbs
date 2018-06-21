@@ -6,26 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Francisco's Blog!</title>
   <link rel="stylesheet" href="/style.min.css">
+  <link rel="stylesheet" href="/blog/style.min.css">
   <link rel="stylesheet" href="/demo/preload/style.min.css">
 </head>
 <body>
   <main>
     <h1>Francisco's Blog</h1>
-      <a href="/blog/es7-exporting-trick/">
-        <h2>ES7 Exporting Trick</h2>
-        <time datetime="2018-06-19 20:00">2018-06-19 20:00</time>
-      </a>
+    <div class="flex two">
+      {{#each blog}}
+        <div>
+          <a href="/demo/instant/{{this.id}}/">
+            <h2>{{this.title}}</h2>
+            <time datetime="{{this.date}}">{{this.date}}</time>
+          </a>
+        </div>
+      {{/each}}
+    </div>
   </main>
-  <!-- <script type="text/javascript" src="https://unpkg.com/instantclick@3.1.0-2/dist/instantclick.js" data-no-instant></script>
-  <script>InstantClick.init();</script> -->
   <script src="https://unpkg.com/moment@2.22.2/min/moment.min.js" data-once></script>
   <script src="https://unpkg.com/tiny-lru@1.6.1/lib/tiny-lru.js" data-once></script>
   <script src="/demo/preload/index.js" data-once></script>
   <script type="text/javascript">
+    console.log('PARSING DATES');
     document.querySelectorAll('[datetime]').forEach(el => {
       el.innerHTML = moment(el.getAttribute('datetime')).fromNow();
     });
-    // preloader.open('/blog/es7-exporting-trick/');
   </script>
 </body>
 </html>
