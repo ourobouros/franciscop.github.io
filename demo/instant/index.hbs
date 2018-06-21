@@ -16,9 +16,17 @@
       {{#each blog}}
         <div>
           <a href="/demo/instant/{{this.id}}/">
-            <h2>{{this.title}}</h2>
+            <h2 id="{{this.id}}">{{this.title}}</h2>
             <time datetime="{{this.date}}">{{this.date}}</time>
           </a>
+        </div>
+      {{/each}}
+    </div>
+    <div>
+      <h3>Same-page links</h3>
+      {{#each blog}}
+        <div>
+          <a href="#{{this.id}}/">{{this.title}}</a>
         </div>
       {{/each}}
     </div>

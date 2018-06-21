@@ -84,6 +84,8 @@ const inject = (scr, body) => new Promise((resolve, reject) => {
 // Fetch either a URL or an <a> element corresponding HTML
 const preload = (ref) => {
   const href = ref.href || ref;
+  // Ignore the totally external links since they cannot be loaded anyway
+  // if (link.host !== location.host) return;
 
   // Already cached
   if (loader[href]) return loader[href];
