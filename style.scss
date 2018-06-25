@@ -28,6 +28,7 @@ p {
   line-height: 1.4;
 }
 
+h1 + p,
 h2 + p {
   margin: .4em 0 .9em;
 }
@@ -91,6 +92,11 @@ a:hover {
   animation: rainbow 1s linear infinite;
 }
 
+.block {
+  display: block;
+  width: 100%;
+}
+
 @keyframes rainbow {
   0% {
     filter: hue-rotate(0deg);
@@ -146,7 +152,7 @@ header {
     margin: 20px 0;
   }
 
-  p {
+  .flex p {
     margin: 8px 0;
     font-size: 1.1em;
   }
@@ -172,13 +178,22 @@ header {
       display: inline-block;
       width: 15px;
       margin-right: 10px;
-      content: "🙂";
     }
-    &[disabled]::before {
-      content: "🤔";
+    &.contact {
+      &::before {
+        content: "🙂";
+      }
+      &[disabled]::before {
+        content: "🤔";
+      }
+      &:hover::before {
+        content: "🤗";
+      }
     }
-    &:hover::before {
-      content: "🤗";
+    &.resume {
+      &::before {
+        content: "📜";
+      }
     }
   }
 

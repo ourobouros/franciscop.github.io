@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post.hbs
 title: Entry C
 date: 2018-06-19 20:00
 categories: jekyll mini clone

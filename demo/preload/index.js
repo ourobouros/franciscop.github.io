@@ -105,20 +105,28 @@ const preload = (ref) => {
 };
 
 // Load either a URL or a <a> element referenced HTML into the body
-const load = ref => {
+const load = async ref => {
   const href = ref.href || ref;
 
-  // Loading indicator
-  bar.show();
+  // TODO: make sure that the url is not the current one with a fragment
 
-  // Already loaded! Yay!
-  if (cache.get(href)) return replaceContent(cache.get(href));
+  // If anything fails, manually load the new page
+  try {
 
-  // The URL is loading; load the replaceContent later on
-  if (loader[href]) return loader[href].then(replaceContent);
+    // Loading indicator
+    bar.show();
 
-  // Manually trigger a link that was not preloaded (preload it then load it)
-  preload(href).then(replaceContent);
+    // Already loaded! Yay!
+    if (cache.get(href)) return await replaceContent(cache.get(href));
+
+    // The URL is loading; load the replaceContent later on
+    if (loader[href]) return await loader[href].then(replaceContent);
+
+    // Manually trigger a link that was not preloaded (preload it then load it)
+    await preload(href).then(replaceContent);
+  } catch (error) {
+    location.href = href;
+  }
 };
 
 // Set the new content to whatever it is passed
@@ -181,7 +189,7 @@ const attach = (links = 'a') => {
     link.addEventListener('touchstart', e => preload(e.currentTarget));
     link.addEventListener('click', e => {
       e.preventDefault();
-      load(e.currentTarget);
+      return load(e.currentTarget);
     });
   });
 };
