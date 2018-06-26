@@ -1,0 +1,58 @@
+@import url('/reset.css');
+:root {
+  min-height: 100%;
+  --key-1: aquamarine;
+  --key-2: dodgerblue;
+  --key-1-alpha: rgba(127,255,212,0.6);
+  --key-2-alpha: rgba(30,144,255,0.6);
+  --shadow: rgba(192,192,192,0.6);
+  --title-font: Garamond;
+}
+body {
+  background: linear-gradient(var(--key-1), var(--key-2));
+  font-family: "Times", serif;
+}
+h1,h2,h3,h4,h5,h6,legend {
+  font-family: var(--title-font);
+}
+legend {
+  font-size: 150%;
+  padding: 2px 1rem 3px;
+}
+fieldset,
+fieldset legend {
+  background: white;
+  border: 1px solid grey;
+}
+legend {
+  box-shadow: 1px 1px 1px 0 var(--shadow);
+}
+fieldset {
+  box-shadow: 0px 1px 1px 0 var(--shadow);
+}
+main {
+  display: block;
+  position: relative;
+}
+main.app {
+  display: table;
+  min-width: 300px;
+  max-width: 667px;
+  margin: 0 auto;
+}
+
+.inter {
+  display: inline-block;
+  background: white;
+  color: black;
+  margin: 0 10px;
+  padding: 0 0.75rem;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 15px;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: top;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+}
