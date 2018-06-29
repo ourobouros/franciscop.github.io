@@ -129,6 +129,32 @@ const load = async ref => {
   }
 };
 
+const exists = (head, el) =>  !![...head.children].find(n => n.isEqualNode(el));
+
+const diffHead = (head, updated) => {
+  // updated.children.map(parse(head)).forEach(console.log);
+
+  [...head.children].filter(node => !exists(updated, node)).forEach(node => {
+    if (node.nodeName.toLowerCase() === 'title') return;
+    head.removeChild(node);
+  });
+
+  [...updated.children].forEach(node => {
+    if (exists(head, node)) return;
+
+    // The title is a bit special; it should be ONCE and it replaces the html
+    if (node.nodeName.toLowerCase() === 'title') {
+      head.querySelector('title').innerText = node.innerText;
+      return;
+    }
+
+    // Everything else can be multiple times and just appended in the end
+    console.log(node, node.outerHTML);
+    head.appendChild(node);
+  });
+};
+
+
 // Set the new content to whatever it is passed
 const replaceContent = ({ href, html }) => {
   // URL & History
@@ -147,7 +173,10 @@ const replaceContent = ({ href, html }) => {
     body.appendChild(node);
   });
 
-  document.querySelector('title').innerText = dom.querySelector('title').innerText;
+  // Head replacement
+  diffHead(document.querySelector('head'), dom.querySelector('head'));
+
+  // document.querySelector('title').innerText = dom.querySelector('title').innerText;
   // const head = document.querySelector('head');
   // head.innerHTML = '';
   // [...dom.querySelector('head').children].forEach(node => {
@@ -159,8 +188,8 @@ const replaceContent = ({ href, html }) => {
 
   // Recursive iteration over the scripts when they have finished loading
   function flipScript ([current, ...scripts]) {
-    if (current) return inject(current, body).then(() => flipScript(scripts));
-    return Promise.resolve();
+    if (!current) return Promise.resolve();
+    return inject(current, body).then(() => flipScript(scripts));
   }
 
   flipScript(scripts).then(() => {
