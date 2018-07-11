@@ -11,11 +11,6 @@ body {
   }
 }
 
-.encrypt .decrypt,
-.decrypt .encrypt {
-  display: none;
-}
-
 .flex {
   align-content: start;
 }
