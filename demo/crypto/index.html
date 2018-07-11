@@ -8,40 +8,44 @@
   <link rel="stylesheet" href="./style.css">
   <title>Secure Pad</title>
   <style>
-    .encrypt .decrypt,
-    .decrypt .encrypt {
+    article.encrypt,
+    article.decrypt {
       display: none;
     }
   </style>
 </head>
 <body>
 
-  <article class="encrypt flex one two-1400">
-    <div class="full">
-      <div><button class="action">Encrypt</button></div>
-      <h1>📜 + 🔑 🡒 🔒</h1>
+  <article class="encrypt">
+    <div class="flex one two-1400">
+      <div class="full">
+        <div><button class="action">Encrypt</button></div>
+        <h1>📜 + 🔑 🡒 🔒</h1>
+      </div>
+      <div>
+        <form class="flex one" method="POST" action="#null">
+          <div><textarea class="message" placeholder="Message!" autofocus></textarea></div>
+          <div><input class="password" type="password" placeholder="Password" /></div>
+        </form>
+      </div>
+      <div><div class="preview"></div></div>
     </div>
-    <div>
-      <form class="flex one" method="POST" action="#null">
-        <div><textarea class="message" placeholder="Message!" autofocus></textarea></div>
-        <div><input class="password" type="password" placeholder="Password" /></div>
-      </form>
-    </div>
-    <div><div class="preview"></div></div>
   </article>
 
-  <article class="decrypt flex one two-1400">
-    <div class="full">
-      <a href="#" class="button action">New</a>
-      <h1>🔒 + 🔑 🡒 📜</h1>
+  <article class="decrypt">
+    <div class="flex one two-1400">
+      <div class="full">
+        <a href="#" class="button action">New</a>
+        <h1>🔒 + 🔑 🡒 📜</h1>
+      </div>
+      <div>
+        <form class="flex one" action="#null" method="POST">
+          <div><input class="url" readonly></div>
+          <div><input class="password" type="password" placeholder="Password" /></div>
+        </form>
+      </div>
+      <div><div class="preview"></div></div>
     </div>
-    <div>
-      <form class="flex one" action="#null" method="POST">
-        <div><input class="url" readonly></div>
-        <div><input class="password" type="password" placeholder="Password" /></div>
-      </form>
-    </div>
-    <div><div class="preview"></div></div>
   </article>
 
   <script src="https://cdn.jsdelivr.net/umbrella/2"></script>
