@@ -10,27 +10,32 @@
 </head>
 <body>
 
-  <div class="flex one">
-    <div>
-      <a href="#" class="button new">New Pad</a>
-      <h1></h1>
+  <article class="encrypt flex one two-1400">
+    <div class="full">
+      <div><button class="action">Encrypt</button></div>
+      <h1>📜 + 🔑 🡒 🔒</h1>
     </div>
-  </div>
-
-  <article class="encrypt">
-    <form class="flex one" method="POST" action="#null">
-      <div><textarea class="message" placeholder="Write your message here. Use Markdown freely!" autofocus></textarea></div>
-      <div><input class="password" type="password" placeholder="Password" /></div>
-      <div><button>Encrypt</button></div>
-    </form>
+    <div>
+      <form class="flex one" method="POST" action="#null">
+        <div><textarea class="message" placeholder="Message!" autofocus></textarea></div>
+        <div><input class="password" type="password" placeholder="Password" /></div>
+      </form>
+    </div>
+    <div><div class="preview"></div></div>
   </article>
 
-  <article class="decrypt">
-    <form class="flex one" action="#null" method="POST">
-      <div><input class="url" readonly></div>
-      <div><input class="password" type="password" placeholder="Password" /></div>
-    </form>
-    <div class="message"></div>
+  <article class="decrypt flex one two-1400">
+    <div class="full">
+      <a href="#" class="button action">New Pad</a>
+      <h1>🔒 + 🔑 🡒 📜</h1>
+    </div>
+    <div>
+      <form class="flex one" action="#null" method="POST">
+        <div><input class="url" readonly></div>
+        <div><input class="password" type="password" placeholder="Password" /></div>
+      </form>
+    </div>
+    <div><div class="preview"></div></div>
   </article>
 
   <script src="https://cdn.jsdelivr.net/umbrella/2"></script>

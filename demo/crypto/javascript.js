@@ -40,13 +40,14 @@ const $encrypt = sel => u('article.encrypt').find(sel);
 // Decrypt provided the cipher from the API and the user key
 const decrypt = (cipher, key) => {
   try {
+    if (!key) return $decrypt('.preview').first().innerHTML = '';
     const plain = crypt.decrypt(cipher, key);
     if (!plain) throw new Error('Invalid password');
     $decrypt('.password').removeClass('error');
-    $decrypt('.message').first().innerHTML = marked(plain);
+    $decrypt('.preview').first().innerHTML = marked(plain);
   } catch (error) {
     $decrypt('.password').addClass('error');
-    $decrypt('.message').first().innerHTML = '';
+    $decrypt('.preview').first().innerHTML = '— Invalid Password —';
   }
 };
 
@@ -72,7 +73,23 @@ $encrypt('form').handle('submit', e => encrypt(
   $encrypt('.password').first().value
 ));
 
+const preview = e => {
+  $encrypt('.preview').first().innerHTML = marked($encrypt('.message').first().value);
+};
+$encrypt('.message').on('click keyup change', preview);
+
 const parse = async () => {
+  // Reset some of the fields
+  u('.password').each(pass => { pass.value = ''; });
+  $encrypt('.message').first().value = `# Hi there! 👋
+
+Write a bit of Markdown here. Or just plain text, we *won't* judge.
+
+Then add a password and click "Encrypt" to get a secure URL.
+
+You can share this URL with anyone; they'll need the key to read it.`;
+  $decrypt('.preview').first().innerHTML = '';
+  preview();
   $decrypt('.url').first().value = window.location.href;
 
   const id = window.location.hash.replace(/^\#/, '');
@@ -80,12 +97,11 @@ const parse = async () => {
   // Add the class 'encrypt' or 'decrypt' to the body depending on the id
   u('body').toggleClass('encrypt', !id).toggleClass('decrypt', !!id);
 
+
   if (!id) return;
   const { message: cipher } = await api.get(`/b/${id}`);
   $decrypt('.password').first().focus();
-  $decrypt('.message').first().innerHTML = '';
-  $decrypt('.password').each(pass => { pass.innerHTML = ''; });
-  $decrypt('.password').on('click keyup change', e => decrypt(cipher, e.target.value));
+  $decrypt('.password').on('keyup change', e => decrypt(cipher, e.target.value));
 };
 parse();
 window.addEventListener("hashchange", parse, false);
