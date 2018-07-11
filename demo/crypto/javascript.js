@@ -43,7 +43,6 @@ const decrypt = (cipher, key) => {
     const plain = crypt.decrypt(cipher, key);
     if (!plain) throw new Error('Invalid password');
     $decrypt('.password').removeClass('error');
-    console.log(marked(plain));
     $decrypt('.message').first().innerHTML = marked(plain);
   } catch (error) {
     $decrypt('.password').addClass('error');
@@ -84,6 +83,8 @@ const parse = async () => {
   if (!id) return;
   const { message: cipher } = await api.get(`/b/${id}`);
   $decrypt('.password').first().focus();
+  $decrypt('.message').first().innerHTML = '';
+  $decrypt('.password').each(pass => { pass.innerHTML = ''; });
   $decrypt('.password').on('click keyup change', e => decrypt(cipher, e.target.value));
 };
 parse();
