@@ -1,0 +1,72 @@
+body {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.encrypt .decrypt,
+.decrypt .encrypt {
+  display: none;
+}
+
+.encrypt .encrypt,
+.decrypt .decrypt {
+  display: block;
+}
+
+input {
+  font-family: monospace;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
+
+[readonly] {
+  background: #eee;
+}
+textarea {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  border: 1px solid #aaa;
+  width: 100%;
+  height: 100px;
+  margin: 0 auto 10px;
+  background: #fff;
+  padding: 10px;
+}
+
+textarea.error,
+input.error {
+  border-color: red;
+}
+
+.messages {
+  margin: 0 auto;
+  width: 600px;
+}
+
+button,
+.button {
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  background: red;
+  color: #fff;
+  margin: 10px auto;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.new {
+  float: right;
+  margin: 2px 0;
+}
+
+body.encrypt .new {
+  display: none;
+}
