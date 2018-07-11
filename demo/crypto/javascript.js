@@ -43,10 +43,10 @@ const decrypt = (cipher, key) => {
     const plain = crypt.decrypt(cipher, key);
     if (!plain) throw new Error('Invalid password');
     $decrypt('.password').removeClass('error');
-    $decrypt('.message').first().value = plain;
+    $decrypt('.message').first().innerHTML = marked(plain);
   } catch (error) {
     $decrypt('.password').addClass('error');
-    $decrypt('.message').first().value = '';
+    $decrypt('.message').first().innerHTML = '';
   }
 };
 
@@ -82,6 +82,7 @@ const parse = async () => {
 
   if (!id) return;
   const { message: cipher } = await api.get(`/b/${id}`);
+  $decrypt('.password').first().focus();
   $decrypt('.password').on('click keyup change', e => decrypt(cipher, e.target.value));
 };
 parse();

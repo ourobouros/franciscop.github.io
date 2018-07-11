@@ -1,7 +1,13 @@
 body {
-  width: calc(100% - 60px);
+  width: calc(100% - 40px);
   max-width: 600px;
-  margin: 60px auto;
+  margin: 20px auto;
+}
+
+@media (min-width: 600px) {
+  body {
+    margin: 60px auto;
+  }
 }
 
 .encrypt .decrypt,
@@ -12,11 +18,23 @@ body {
 h1 {
   padding: 0;
   line-height: 1;
+  font-size: 1.8em;
+}
+
+textarea {
+  min-height: 150px;
 }
 
 textarea.error,
 input.error {
   border-color: red;
+}
+
+input,
+textarea,
+button,
+.button {
+  border-radius: 0;
 }
 
 button,
@@ -30,8 +48,12 @@ button,
 
 .new {
   float: right;
+  opacity: 1;
+  margin: -2px 0;
+  transition: all .3s ease;
 }
 
 body.encrypt .new {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
