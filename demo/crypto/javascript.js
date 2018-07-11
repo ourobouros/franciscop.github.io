@@ -43,6 +43,7 @@ const decrypt = (cipher, key) => {
     const plain = crypt.decrypt(cipher, key);
     if (!plain) throw new Error('Invalid password');
     $decrypt('.password').removeClass('error');
+    console.log(marked(plain));
     $decrypt('.message').first().innerHTML = marked(plain);
   } catch (error) {
     $decrypt('.password').addClass('error');
