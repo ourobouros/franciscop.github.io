@@ -15,6 +15,18 @@ body {
   display: none;
 }
 
+h1::after {
+  /*margin-left: 18px;*/
+}
+
+body.encrypt h1::after {
+  content: '📜 + 🔑 🡒 🔒';
+}
+
+body.decrypt h1::after {
+  content: '🔒 + 🔑 🡒 📜';
+}
+
 h1 {
   padding: 0;
   line-height: 1;
