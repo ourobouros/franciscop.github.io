@@ -54,9 +54,9 @@ const decrypt = (cipher, key) => {
 // Encrypt from the message and key and redirects to the encrypted pad
 const encrypt = async (message, key) => {
   try {
+    $encrypt('.message, .password').removeClass('error');
     if (!message) return $encrypt('.message').addClass('error');
     if (!key) return $encrypt('.password').addClass('error');
-    $encrypt('.message, .password').removeClass('error');
     const res = await api.post('/b', { message: crypt.encrypt(message, key) });
     $encrypt('.message').first().value = '';
     $encrypt('.password').first().value = '';

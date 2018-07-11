@@ -4,26 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/picnic">
   <link rel="stylesheet" href="./style.css">
   <title>Secure Pad</title>
 </head>
 <body>
-  <a href="#" class="button new">New Pad</a>
-  <h1>Secure Pad</h1>
+
+  <div class="flex one">
+    <div>
+      <a href="#" class="button new">New Pad</a>
+      <h1>Secure Pad</h1>
+    </div>
+  </div>
 
   <article class="encrypt">
-    <form method="POST" action="#null">
-      <textarea class="message" name="message" placeholder="Message"></textarea>
-      <input class="password" type="password" name="password" placeholder="Password" />
-      <button>Save encrypted</button>
+    <form class="flex one" method="POST" action="#null">
+      <div><textarea class="message" placeholder="Message"></textarea></div>
+      <div><input class="password" type="password" placeholder="Password" /></div>
+      <div><button>Encrypt</button></div>
     </form>
   </article>
 
   <article class="decrypt">
-    <form action="#null" method="POST">
-      <input class="url" name="url" readonly>
-      <input class="password" type="password" name="password" placeholder="Password" />
-      <textarea class="message" readonly></textarea>
+    <form class="flex one" action="#null" method="POST">
+      <div><input class="url" readonly></div>
+      <div><input class="password" type="password" placeholder="Password" /></div>
+      <div><textarea class="message" readonly></textarea></div>
     </form>
   </article>
 
