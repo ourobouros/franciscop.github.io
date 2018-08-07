@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      width: 600px;
+      margin: 50px auto;
+    }
+
+    .asobu {
+      width: 600px;
+      height: 300px;
+      position: relative;
+    }
+
+    section {
+      width: 600px;
+      height: 300px;
+      border: 2px solid #333;
+      border-top: 26px solid #333;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin: 0;
+      line-height: 1.5;
+      padding: 6px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: scale(0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: all .3s ease .3s;
+      border-radius: 4px;
+    }
+
+    section.visible {
+      transform: scale(1);
+      pointer-events: all;
+    }
+
+    section.active {
+      z-index: 10;
+      opacity: 1;
+      transition: all .3s ease;
+    }
+
+    section::before,
+    section::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #f55;
+      top: -18px;
+      left: 8px;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    section::after {
+      left: 26px;
+      background: #3d3;
+    }
+
+    .browser {
+      background: #fff;
+      color: #333;
+      border-color: #ddd;
+    }
+
+    .terminal {
+      background: #303;
+      color: #fab943;
+      display: block;
+      unicode-bidi: embed;
+      font-family: monospace;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+  <div class="asobu">
+    <section class="terminal"></section>
+    <section class="browser"></section>
+    <section class="editor"></section>
+  </div>
+  <script src="/umbrella.min.js"></script>
+  <script src="/index.js"></script>
+</body>
+</html>
