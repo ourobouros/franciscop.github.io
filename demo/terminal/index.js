@@ -2,8 +2,9 @@ const clean = line => line.trim().replace(/^\[/, '').replace(/\]$/, '');
 
 const parseCommand = line => ({
   line,
-  display: clean(line).split(':')[0].trim(),
-  command: clean(line).split(':').slice(1).join(':').trim(),
+  display: clean(line.split(']')[0]).split(':')[0].trim(),
+  extra: clean(line.split(']')[0]).split(':').slice(1),
+  command: clean(line.split(']')[1]).trim(),
   content: ''
 });
 
@@ -13,10 +14,11 @@ const parse = inst => inst.trim().split('\n').reduce((arr, line) => {
   return arr;
 }, []);
 
-const show = name => {
+const show = (name, title = "") => {
   const stop = u(name).is('.active');
   u('section').removeClass('active');
   u(name).addClass('visible active');
+  if (title) u(name).data('title', ' ' + title);
   return stop || play.wait(500);
 };
 
@@ -43,8 +45,8 @@ const play = async inst => {
   }
 };
 
-play.terminal = async ({ element, command, content }) => {
-  await show('.terminal');
+play.terminal = async ({ element, command, content, extra }) => {
+  await show('.terminal', extra[0]);
   element.text(element.text() + (element.text() ? '\n' : '') + '$ ');
   await type(element, command);
   element.text(`${element.text()}\n${content}`.trim());
@@ -52,14 +54,14 @@ play.terminal = async ({ element, command, content }) => {
 };
 
 play.browser = async ({ element, content, command }) => {
-  await show('.browser');
+  await show('.browser', command);
   element.html(content);
   await play.wait(parseInt(command));
 };
 
-play.code = async ({ element, content, command }) => {
-  await show('.code');
-  element = element.html(`<pre><code class="language-${command}"></code></pre>`).find('code').html('');
+play.code = async ({ element, content, command, extra }) => {
+  await show('.code', command);
+  element = element.html(element.html() + `<pre><code class="language-${extra[0]}"></code></pre>`).find('code').html('');
   await type(element, content, ({ element }) => {
     element.html(Prism.highlight(element.text(), Prism.languages.javascript, 'javascript'));
   });
@@ -69,24 +71,24 @@ play.code = async ({ element, content, command }) => {
 play.wait = time => new Promise(resolve => setTimeout(resolve, time));
 
 play(`
-[terminal: node --version]
+[terminal:~/web] node --version
 v10.8.0
-[terminal: npm init --yes]
+[terminal] npm init --yes
 Wrote to /home/[CURRENT_PATH]/package.json:
 ...
 
-[terminal: npm install server]
+[terminal] npm install server
 + server@1.0.18
 
-[terminal: atom index.js]
+[terminal] atom index.js
 
-[code:js]
+[code:js] index.js
 const server = require('server');
 
 // Launch it on localhost:3000
-server(ctx => \`Hello <strong>localhost:\${ctx.options.port}</strong>!\`);
-[terminal: node .]
+server(ctx => \`Hello localhost:\${ctx.options.port}!\`);
+[terminal] node .
 
-[browser:2000]
-Hello <strong>localhost:3000</strong>
+[browser] localhost:3000
+Hello localhost:3000
 `);
