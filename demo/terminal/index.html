@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Terminal simulator</title>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-twilight.css" rel="stylesheet" />
   <style>
     body {
       width: 100%;
@@ -19,7 +21,7 @@
     }
 
     section {
-      width: 600px;
+      width: 100%;
       height: 300px;
       border: 2px solid #333;
       border-top: 26px solid #333;
@@ -67,10 +69,22 @@
       background: #3d3;
     }
 
+    pre {
+      margin: 0;
+    }
+
     .browser {
       background: #fff;
       color: #333;
       border-color: #ddd;
+    }
+
+    .code {
+      background: hsl(0, 0%, 8%);
+      display: block;
+      unicode-bidi: embed;
+      font-family: monospace;
+      white-space: pre-wrap;
     }
 
     .terminal {
@@ -80,7 +94,7 @@
       display: block;
       unicode-bidi: embed;
       font-family: monospace;
-      white-space: pre;
+      white-space: pre-wrap;
     }
   </style>
 </head>
@@ -88,9 +102,10 @@
   <div class="asobu">
     <section class="terminal"></section>
     <section class="browser"></section>
-    <section class="editor"></section>
+    <section class="code"></section>
   </div>
   <script src="umbrella.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

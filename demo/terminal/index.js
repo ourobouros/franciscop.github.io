@@ -21,9 +21,10 @@ const show = name => {
 };
 
 
-const type = async (el, text) => {
+const type = async (element, text, cb = () => {}) => {
   for (const char of text.split('')) {
-    el.text(el.text() + char);
+    element.text(element.text() + char);
+    cb({ element });
     await play.wait(/\W/.test(char) ? 250 : 80);
   }
 };
@@ -47,7 +48,7 @@ play.terminal = async ({ element, command, content }) => {
   element.text(element.text() + (element.text() ? '\n' : '') + '$ ');
   await type(element, command);
   element.text(`${element.text()}\n${content}`.trim());
-  await play.wait(1000);
+  await play.wait(1000 + parseInt(content.length * 25));
 };
 
 play.browser = async ({ element, content, command }) => {
@@ -56,17 +57,36 @@ play.browser = async ({ element, content, command }) => {
   await play.wait(parseInt(command));
 };
 
+play.code = async ({ element, content, command }) => {
+  await show('.code');
+  element = element.html(`<pre><code class="language-${command}"></code></pre>`).find('code').html('');
+  await type(element, content, ({ element }) => {
+    element.html(Prism.highlight(element.text(), Prism.languages.javascript, 'javascript'));
+  });
+  await play.wait(1000);
+};
+
 play.wait = time => new Promise(resolve => setTimeout(resolve, time));
 
-
-// u('.asobu').terminal();
-
 play(`
-[terminal: echo "Hello <strong>world</strong>" > index.html]
-[terminal: ls]
-index.html
-[terminal: firefox index.html]
+[terminal: node --version]
+v10.8.0
+[terminal: npm init --yes]
+Wrote to /home/[CURRENT_PATH]/package.json:
+...
+
+[terminal: npm install server]
++ server@1.0.18
+
+[terminal: atom index.js]
+
+[code:js]
+const server = require('server');
+
+// Launch it on localhost:3000
+server(ctx => \`Hello <strong>localhost:\${ctx.options.port}</strong>!\`);
+[terminal: node .]
 
 [browser:2000]
-Hello <strong>world</strong>
+Hello <strong>localhost:3000</strong>
 `);
