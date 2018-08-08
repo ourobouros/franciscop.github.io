@@ -90,5 +90,5 @@ server(ctx => \`Hello localhost:\${ctx.options.port}!\`);
 [terminal] node .
 
 [browser] http://localhost:3000/
-Hello localhost:3000
+Hello localhost:3000!
 `);
