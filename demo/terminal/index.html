@@ -124,6 +124,30 @@
   </div>
   <script src="umbrella.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
-  <script src="index.js"></script>
+  <script src="play.js"></script>
+  <script>
+  play(`
+[terminal:~/web] node --version
+v10.8.0
+[terminal] npm init --yes
+Wrote to /home/[CURRENT_PATH]/package.json:
+...
+
+[terminal] npm install server
++ server@1.0.18
+
+[terminal] atom index.js
+
+[code:js] index.js
+const server = require('server');
+
+// Launch it on localhost:3000
+server(ctx => \`Hello localhost:\${ctx.options.port}!\`);
+[terminal] node .
+
+[browser] http://localhost:3000/
+Hello localhost:3000!`);
+
+  </script>
 </body>
 </html>

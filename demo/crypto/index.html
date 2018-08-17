@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://unpkg.com/picnic@6.5.0/picnic.min.css">
   <link rel="stylesheet" href="./style.css">
-  <title>Secure Pad</title>
+  <title>Crypto Down</title>
   <style>
     article.encrypt,
     article.decrypt {
@@ -19,14 +19,15 @@
   <article class="encrypt">
     <div class="flex one two-1400">
       <div class="full">
-        <div><button class="action">Encrypt</button></div>
-        <h1>📜 + 🔑 🡒 🔒</h1>
+        <div><button class="action">🔑 Encrypt</button></div>
+        <h1>🔒 Encrypt</h1>
       </div>
       <div>
         <form class="flex one" method="POST" action="#null">
           <div><textarea class="message" placeholder="Message!" autofocus></textarea></div>
           <div><input class="password" type="password" placeholder="Password" /></div>
         </form>
+        <br />
       </div>
       <div><div class="preview"></div></div>
     </div>
@@ -35,13 +36,14 @@
   <article class="decrypt">
     <div class="flex one two-1400">
       <div class="full">
-        <a href="#" class="button action">New</a>
-        <h1>🔒 + 🔑 🡒 📜</h1>
+        <a href="#" class="button action">📜 New</a>
+        <h1>🔑 Decrypt</h1>
       </div>
       <div>
         <form class="flex one" action="#null" method="POST">
           <div><input class="url" readonly></div>
           <div><input class="password" type="password" placeholder="Password" /></div>
+          <br />
         </form>
       </div>
       <div><div class="preview"></div></div>

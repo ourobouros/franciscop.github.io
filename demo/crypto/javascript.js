@@ -4,20 +4,15 @@ const crypt = {
   decrypt: (cipher, key) => CryptoJS.AES.decrypt(cipher.toString(), key).toString(CryptoJS.enc.Utf8)
 };
 
-// Generate a random string
-const rndstr = () => Math.random().toString(36).substring(2, 10);
-
-// Dummy test for a lack of an API
-const dummy = crypt.encrypt('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'abcdefg');
 
 
+// Wrapper around fetch with common headers, JSON, etc
 const rest = (path, { method='GET', headers={}, body } = {}) => {
   const url = `https://api.jsonbin.io/${path.replace(/^\//, '')}`;
-  const options = { method, headers: {
+  const options = { method, headers: Object.assign({}, {
       'Content-Type': 'application/json',
       'Accepts': 'application/json',
-      ...headers
-    }
+    }, headers)
   };
   if (body) options.body = typeof body === 'string' ? body : JSON.stringify(body);
   return fetch(url, options).then(res => res.json());
@@ -32,9 +27,10 @@ const api = {
 
 
 
-// The HTML elements
+// Selector for the two main HTML elements
 const $decrypt = sel => u('article.decrypt').find(sel);
 const $encrypt = sel => u('article.encrypt').find(sel);
+
 
 
 // Decrypt provided the cipher from the API and the user key
@@ -52,6 +48,7 @@ const decrypt = (cipher, key) => {
 };
 
 
+
 // Encrypt from the message and key and redirects to the encrypted pad
 const encrypt = async (message, key) => {
   try {
@@ -67,12 +64,17 @@ const encrypt = async (message, key) => {
   }
 };
 
+
+
 // Handle events for the encrypting form
 $encrypt('form').handle('submit', e => encrypt(
   $encrypt('.message').first().value,
   $encrypt('.password').first().value
 ));
 
+
+
+// Show the preview of the markdown
 const preview = e => {
   $encrypt('.preview').first().innerHTML = marked($encrypt('.message').first().value);
 };
