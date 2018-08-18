@@ -11,23 +11,35 @@
       margin: 10px 0;
       width: 100%;
       display: flex;
-      align-items: center;
+      /*align-items: center;*/
       justify-content: center;
     }
-    textarea {
+    .editor {
       flex-basis: 30%;
-      height: 300px;
+      height: 500px;
+    }
+    textarea {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      height: 250px;
+      border: 2px solid #ccc;
+    }
+    pre {
+      margin-top: 10px;
       border: 2px solid #ccc;
     }
     .error {
       border-color: red;
     }
     #processed {
+      margin-top: 30px;
       flex-basis: 30%;
     }
   </style>
 </head>
 <body>
+  <div class="editor">
   <textarea>
 {
   "App": {
@@ -39,13 +51,14 @@
       "Pricing"
     ]
   }
-}
-  </textarea>
+}</textarea>
+  <pre></pre>
+  </div>
   <div id="processed" class="tree"></div>
 
   <script>
     // Slugify so we can do stuff with JS or CSS
-    const slug = str => str.replace(/\W+/, '-').toLowerCase();
+    const slug = str => str.replace(/\W+/, '-').replace(/^\-/, '').replace(/\-$/, '').toLowerCase();
 
     // Recursively parse from a JS object to a HTML list block
     const parse = data => {
@@ -66,15 +79,14 @@
 
       // Render the object
       return `
-        <ul>
-          ${Object.entries(data).map(([key, value]) => `
-            <li>
-              <span class="${slug(key)}">${key}</span>
-              ${parse(value)}
-            </li>
-          `).join('')}
-        </ul>
-      `;
+  <ul>
+    ${Object.entries(data).map(([key, value]) => `
+    <li>
+      <span class="${slug(key)}">${key}</span>
+      ${parse(value)}
+    </li>
+    `.trim()).join('')}
+  </ul>`;
     };
 
     const area = document.querySelector('textarea');
@@ -83,6 +95,7 @@
         const data = JSON.parse(area.value);
         area.classList.remove('error');
         document.querySelector('#processed').innerHTML = parse(data);
+        document.querySelector('pre').textContent = `<tree-view>${parse(data)}</tree-view>`;
       } catch (error) {
         console.log(error);
         area.classList.add('error');
