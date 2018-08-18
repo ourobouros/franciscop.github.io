@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tree Visualization</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    body {
+      margin: 10px 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    textarea {
+      flex-basis: 30%;
+      height: 300px;
+      border: 2px solid #ccc;
+    }
+    .error {
+      border-color: red;
+    }
+    #processed {
+      flex-basis: 30%;
+    }
+  </style>
+</head>
+<body>
+  <textarea>
+{
+  "App": {
+    "Nav": false,
+    "Sidebar": false,
+    "Main": [
+      "Hero",
+      "Features",
+      "Pricing"
+    ]
+  }
+}
+  </textarea>
+  <div id="processed" class="tree"></div>
+
+  <script>
+    // Slugify so we can do stuff with JS or CSS
+    const slug = str => str.replace(/\W+/, '-').toLowerCase();
+
+    // Recursively parse from a JS object to a HTML list block
+    const parse = data => {
+      // Return in these cases
+      if (!data) return '';
+      if (typeof data === 'boolean') return '';
+
+      // Convert to a simple array
+      if (typeof data === 'string') data = [data];
+
+      // Convert array to object
+      if (Array.isArray(data)) {
+        data = data.reduce((obj, el) => {
+          if (typeof el === 'string') return { ...obj, [el]: "" };
+          return { ...obj, ...el };
+        }, {});
+      }
+
+      // Render the object
+      return `
+        <ul>
+          ${Object.entries(data).map(([key, value]) => `
+            <li>
+              <span class="${slug(key)}">${key}</span>
+              ${parse(value)}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    };
+
+    const area = document.querySelector('textarea');
+    const render = () => {
+      try {
+        const data = JSON.parse(area.value);
+        area.classList.remove('error');
+        document.querySelector('#processed').innerHTML = parse(data);
+      } catch (error) {
+        console.log(error);
+        area.classList.add('error');
+      }
+    };
+    area.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
