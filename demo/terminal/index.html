@@ -14,13 +14,65 @@
       margin: 50px auto;
     }
 
-    .asobu {
+    play-time {
+      white-space: pre;
+      display: block;
       width: 100%;
       height: 300px;
       position: relative;
     }
 
-    section {
+    play-time.active {
+      white-space: normal;
+    }
+
+    play-control {
+      display: flex;
+      position: absolute;
+      bottom: -40px;
+      width: 100%;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    play-control .step,
+    play-control .play {
+      cursor: pointer;
+      line-height: 26px;
+      height: 30px;
+      background: #eee;
+      transition: all .3s ease;
+    }
+
+    play-control .step:hover,
+    play-control .play:hover {
+      background: #ddd;
+    }
+
+    play-control .play {
+      flex-basis: 50px;
+      margin-right: 8px;
+      border-radius: 4px;
+    }
+
+    play-control .step {
+      flex-grow: 1;
+    }
+
+    play-control .step.active {
+      box-shadow: inset 0 0 0 3px #709eff;
+    }
+
+    play-control > *:nth-child(2) {
+      border-radius: 4px 0 0 4px;
+    }
+
+    play-control .step:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    play-window {
+      display: block;
       width: 100%;
       height: 300px;
       border: 2px solid #333;
@@ -35,24 +87,25 @@
       left: 0;
       transform: scale(0.5);
       opacity: 0;
+      white-space: normal;
       pointer-events: none;
       transition: all .3s ease .3s;
       border-radius: 4px;
     }
 
-    section.visible {
+    play-window.visible {
       transform: scale(1);
       pointer-events: all;
     }
 
-    section.active {
+    play-window.active {
       z-index: 10;
       opacity: 1;
       transition: all .3s ease;
     }
 
-    section::before,
-    section::after {
+    play-window::before,
+    play-window::after {
       content: "";
       position: absolute;
       width: 12px;
@@ -64,7 +117,7 @@
       z-index: 10;
     }
 
-    section::after {
+    play-window::after {
       content: attr(data-title);
       left: 26px;
       background: #3d3;
@@ -96,6 +149,7 @@
     }
 
     .code {
+      color: white;
       background: hsl(0, 0%, 8%);
       display: block;
       unicode-bidi: embed;
@@ -117,16 +171,7 @@
   </style>
 </head>
 <body>
-  <div class="asobu">
-    <section class="terminal"></section>
-    <section class="browser"></section>
-    <section class="code"></section>
-  </div>
-  <script src="umbrella.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
-  <script src="play.js"></script>
-  <script>
-  play(`
+  <play-time>
 [terminal:~/web] node --version
 v10.8.0
 [terminal] npm init --yes
@@ -138,16 +183,42 @@ Wrote to /home/[CURRENT_PATH]/package.json:
 
 [terminal] atom index.js
 
-[code:js] index.js
+[code:index.js]
 const server = require('server');
 
 // Launch it on localhost:3000
-server(ctx => \`Hello localhost:\${ctx.options.port}!\`);
+server(ctx => `Hello world!`);
 [terminal] node .
 
-[browser] http://localhost:3000/
-Hello localhost:3000!`);
-
+[browser:http://localhost:3000/]
+Hello world
+  </play-time>
+  <script src="umbrella.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+  <script src="play.js"></script>
+  <script>
+    play();
+//   play(`
+// [terminal:~/web] node --version
+// v10.8.0
+// [terminal] npm init --yes
+// Wrote to /home/[CURRENT_PATH]/package.json:
+// ...
+//
+// [terminal] npm install server
+// + server@1.0.18
+//
+// [terminal] atom index.js
+//
+// [code:js] index.js
+// const server = require('server');
+//
+// // Launch it on localhost:3000
+// server(ctx => \`Hello localhost:\${ctx.options.port}!\`);
+// [terminal] node .
+//
+// [browser] http://localhost:3000/
+// Hello localhost:3000!`);
   </script>
 </body>
 </html>
