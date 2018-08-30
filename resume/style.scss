@@ -70,10 +70,11 @@ h2 {
 h3 {
   line-height: 1.3em;
   padding: .3em 0 0;
+  margin: 0;
 }
 
 p {
-  margin: .25em 0;
+  margin: 0;
 }
 
 ul {
@@ -114,47 +115,6 @@ ul {
 [class^="icon-"]::before {
   margin-right: .3em;
 }
-
-@media print {
-  @page {
-    margin: 1.5cm;
-  }
-
-  section {
-    page-break-inside: avoid;
-  }
-
-  body {
-    width: 100%;
-    padding: 0;
-    margin: 0 auto;
-    box-shadow: none;
-  }
-
-  .download {
-    display: none;
-  }
-
-  a {
-    color: #333;
-  }
-
-  .links  a {
-    padding: 0;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  body {
-    padding: 2em 1em 10em;
-    margin: 0;
-    width: 100%;
-  }
-  .links {
-    width: 100%;
-  }
-}
-
 
 
 
@@ -208,7 +168,7 @@ body.front article {
 }
 
 .year {
-  color: #aaa;
+  color: #aaaaaa;
   font-size: .7em;
   margin-right: 1em;
   line-height: 27px;
@@ -216,4 +176,49 @@ body.front article {
   float: right;
   height: 25px;
   overflow: hidden;
+}
+
+
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+
+  .year {
+    margin-right: .5em;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+
+  body {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+
+  .download {
+    display: none;
+  }
+
+  a {
+    color: #333;
+  }
+
+  .links  a {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    padding: 2em 1em 10em;
+    margin: 0;
+    width: 100%;
+  }
+  .links {
+    width: 100%;
+  }
 }
