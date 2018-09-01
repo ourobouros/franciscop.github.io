@@ -5,18 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tree Visualization</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./tree.css">
   <style>
     body {
       margin: 10px 0;
       width: 100%;
       display: flex;
-      /*align-items: center;*/
       justify-content: center;
-    }
-    .editor {
-      flex-basis: 30%;
-      height: 500px;
     }
     textarea {
       box-sizing: border-box;
@@ -28,12 +23,15 @@
     pre {
       margin-top: 10px;
       border: 2px solid #ccc;
+      width: 350px;
+      max-height: 300px;
+      overflow-y: auto;
     }
     .error {
       border-color: red;
     }
     #processed {
-      margin-top: 30px;
+      margin-top: 50px;
       flex-basis: 30%;
     }
   </style>
@@ -41,21 +39,21 @@
 <body>
   <div class="editor">
   <textarea>
-{
-  "App": {
-    "Nav": false,
-    "Sidebar": false,
-    "Main": [
-      "Hero",
-      "Features",
-      "Pricing"
-    ]
-  }
-}</textarea>
+{"App": [
+  "Nav",
+  "Sidebar",
+  {"Main": [
+    "Hero",
+    "Features",
+    "Pricing"
+  ]}
+]}</textarea>
   <pre></pre>
   </div>
   <div id="processed" class="tree"></div>
 
+
+  <script src="https://cdn.jsdelivr.net/npm/js-beautify@1/js/lib/beautify-html.js"></script>
   <script>
     // Slugify so we can do stuff with JS or CSS
     const slug = str => str.replace(/\W+/, '-').replace(/^\-/, '').replace(/\-$/, '').toLowerCase();
@@ -79,23 +77,29 @@
 
       // Render the object
       return `
-  <ul>
-    ${Object.entries(data).map(([key, value]) => `
-    <li>
-      <span class="${slug(key)}">${key}</span>
-      ${parse(value)}
-    </li>
-    `.trim()).join('')}
-  </ul>`;
+        <ul>
+          ${Object.entries(data).map(([key, value]) => `
+          <li>
+            <span>${key}</span>
+            ${parse(value)}
+          </li>
+          `.trim()).join('')}
+        </ul>
+      `;
     };
+
+    const indent = html => html_beautify(html, { indent_size: 2 });
 
     const area = document.querySelector('textarea');
     const render = () => {
       try {
         const data = JSON.parse(area.value);
         area.classList.remove('error');
-        document.querySelector('#processed').innerHTML = parse(data);
-        document.querySelector('pre').textContent = `<tree-view>${parse(data)}</tree-view>`;
+        document.querySelector('#processed').innerHTML = indent(parse(data));
+        document.querySelector('pre').textContent = indent(parse(data))
+          .split('\n')
+          .filter(line => !/^\s*$/.test(line))
+          .join('\n');
       } catch (error) {
         console.log(error);
         area.classList.add('error');
