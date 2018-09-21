@@ -1,110 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{title}}</title>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="./img/logo.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- Standard -->
-  <title>Francisco Presencia</title>
-  <meta content="Blog, Francisco Presencia, Francisco, Presencia, Software, Programmer, Javascript, Node.js" name="keywords">
-  <meta content="{{description}}" name="description">
+    <!-- Standard -->
+    <title>Francisco Presencia</title>
+    <meta content="Blog, Francisco Presencia, Francisco, Presencia, Software, Programmer, Javascript, Node.js" name="keywords">
+    <meta content="{{description}}" name="description">
 
-  <!-- Thanks https://moz.com/blog/meta-data-templates-123 -->
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@fpresencia">
-  <meta name="twitter:title" content="{{title}}">
-  <meta name="twitter:description" content="{{description}}">
-  <meta name="twitter:creator" content="@fpresencia">
-  <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
+    <!-- Thanks https://moz.com/blog/meta-data-templates-123 -->
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fpresencia">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{description}}">
+    <meta name="twitter:creator" content="@fpresencia">
+    <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
 
-  <!-- Open Graph data -->
-  <meta property="og:title" content="{{title}}" />
-  <meta property="og:type" content="profile" />
-  <meta property="og:url" content="https:///francisco.io/blog/{{id}}/" />
-  <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
-  <meta property="og:description" content="{{description}}" />
-  <meta property="og:site_name" content="Blog of Francisco Presencia" />
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https:///francisco.io/blog/{{id}}/" />
+    <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
+    <meta property="og:description" content="{{description}}" />
+    <meta property="og:site_name" content="Blog of Francisco Presencia" />
 
-  <link href="/style.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet" />
-  <style media="screen">
-    h2, h3 {
-      margin: 1.2em 0 -.3em;
-      padding: 0;
-    }
+    <link href="/style.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet" />
+    <style media="screen">
+      h2, h3 {
+        margin: 1.2em 0 -.3em;
+        padding: 0;
+      }
 
-    comment-box h2 {
-      margin: 0;
-    }
+      comment-box h2 {
+        margin: 0;
+      }
 
-    pre,
-    pre[class*="language-"] {
-      line-height: 1;
-      background: #272822;
-      margin: .8em -10px;
-      border-radius: 0;
-      padding: 10px;
-    }
-
-    @media (min-width: 500px) {
       pre,
       pre[class*="language-"] {
-        margin: .8em 0;
-        border-radius: .3em;
-        padding: 1em;
+        line-height: 1;
+        background: #272822;
+        margin: .8em -10px;
+        border-radius: 0;
+        padding: 10px;
       }
-    }
 
-    h1 + p, h2 + p, p {
-      margin: .8em 0;
-    }
+      @media (min-width: 500px) {
+        pre,
+        pre[class*="language-"] {
+          margin: .8em 0;
+          border-radius: .3em;
+          padding: 1em;
+        }
+      }
 
-    .meta {
-      margin-top: 10px;
-      color: #888;
-    }
+      h1 + p, h2 + p, p {
+        margin: .8em 0;
+      }
 
-    .meta a {
-      margin-right: 10px;
-    }
+      .meta {
+        margin-top: 10px;
+        color: #888;
+      }
 
-    .meta .logo {
-      width: 20px;
-      vertical-align: text-top;
-    }
+      .meta a {
+        margin-right: 10px;
+      }
 
-    pre[class*="language-"] {
-      border: none;
-    }
+      .meta .logo {
+        width: 20px;
+        vertical-align: text-top;
+      }
 
-    .banner {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>{{title}}</h1>
-    <div class="meta">
-      <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
-      <a href="https:///francisco.io/blog/{{id}}/">🕑 <time datetime="{{date}}">{loading...}</time></a>
-    </div>
+      pre[class*="language-"] {
+        border: none;
+      }
 
-    {{{body}}}
+      .banner {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>{{title}}</h1>
+      <div class="meta">
+        <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
+        <a href="https:///francisco.io/blog/{{id}}/">🕑 <time datetime="{{date}}">{loading...}</time></a>
+      </div>
 
-    <a href="https://www.paypal.me/franciscopresencia/10">💙 💚 💛 💜</a>
+      {{{body}}}
 
-    <comment-box title=""></comment-box>
+      <a href="https://www.paypal.me/franciscopresencia/10">💙 💚 💛 💜</a>
 
-    <script src="https://cdn.jsdelivr.net/npm/timeago.js/dist/timeago.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
-    <script src="https://comments.network/comments.js"></script>
-    <script type="text/javascript">
-      timeago().render(document.querySelectorAll('time'));
-    </script>
-  </main>
-</body>
+      <comment-box title=""></comment-box>
+
+      <script src="https://cdn.jsdelivr.net/npm/timeago.js/dist/timeago.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+      <script src="https://comments.network/comments.js"></script>
+      <script type="text/javascript">
+        timeago().render(document.querySelectorAll('time'));
+      </script>
+    </main>
+  </body>
 </html>
