@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
+
+  <!-- Standard -->
+  <title>Francisco Presencia</title>
+  <meta content="Blog, Francisco Presencia, Francisco, Presencia, Software, Programmer, Javascript, Node.js" name="keywords">
+  <meta content="{{description}}" name="description">
+
+  <!-- Thanks https://moz.com/blog/meta-data-templates-123 -->
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@fpresencia">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:creator" content="@fpresencia">
+  <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https:///francisco.io/blog/{{id}}/" />
+  <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
+  <meta property="og:description" content="{{description}}" />
+  <meta property="og:site_name" content="Blog of Francisco Presencia" />
+
   <link href="/style.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet" />
   <style media="screen">
@@ -67,7 +90,7 @@
     <h1>{{title}}</h1>
     <div class="meta">
       <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
-      <a href="https:///francisco.io/blog/better-promises/">🕑 <time datetime="{{date}}">{loading...}</time></a>
+      <a href="https:///francisco.io/blog/{{id}}/">🕑 <time datetime="{{date}}">{loading...}</time></a>
     </div>
 
     {{{body}}}

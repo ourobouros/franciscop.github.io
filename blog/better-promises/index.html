@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Better Promises</title>
+
+  <!-- Standard -->
+  <title>Francisco Presencia</title>
+  <meta content="Blog, Francisco Presencia, Francisco, Presencia, Software, Programmer, Javascript, Node.js" name="keywords">
+  <meta content="Exploring the limitations of Javascript&#x27;s Promises and what I did to overcome them" name="description">
+
+  <!-- Thanks https://moz.com/blog/meta-data-templates-123 -->
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@fpresencia">
+  <meta name="twitter:title" content="Better Promises">
+  <meta name="twitter:description" content="Exploring the limitations of Javascript&#x27;s Promises and what I did to overcome them">
+  <meta name="twitter:creator" content="@fpresencia">
+  <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="Better Promises" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https:///francisco.io/blog/better-promises/" />
+  <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
+  <meta property="og:description" content="Exploring the limitations of Javascript&#x27;s Promises and what I did to overcome them" />
+  <meta property="og:site_name" content="Blog of Francisco Presencia" />
+
   <link href="/style.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet" />
   <style media="screen">
@@ -53,10 +76,6 @@
       vertical-align: text-top;
     }
 
-    .advanced::before {
-      content: '🌀 ';
-    }
-
     pre[class*="language-"] {
       border: none;
     }
@@ -72,7 +91,6 @@
     <div class="meta">
       <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
       <a href="https:///francisco.io/blog/better-promises/">🕑 <time datetime="Thu Sep 20 2018 09:00:00 GMT+0900 (JST)">{loading...}</time></a>
-      <span class="advanced">advanced level</span>
     </div>
 
     <p>I love promises. It isn&#39;t a secret and I&#39;ve said it <a href="https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab">many</a>, <a href="https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452">many</a> times. They come in all asynchronous shapes and colors. But the question always arises: could they be any better? To even pretend to answer that, let&#39;s see some places where they fall short:</p>

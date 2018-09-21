@@ -1,8 +1,11 @@
 ---
 layout: blog.hbs
 title: Better Promises
+description: Exploring the limitations of Javascript's Promises and what I did to overcome them
 date: 2018-09-20
 ---
+
+
 
 I love promises. It isn't a secret and I've said it [many](https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab), [many](https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452) times. They come in all asynchronous shapes and colors. But the question always arises: could they be any better? To even pretend to answer that, let's see some places where they fall short:
 
