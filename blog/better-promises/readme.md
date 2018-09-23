@@ -7,11 +7,11 @@ date: 2018-09-20
 
 
 
-I love promises. It isn't a secret and I've said it [many](https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab), [many](https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452) times. They come in all asynchronous shapes and colors. But the question always arises: could they be any better? To even pretend to answer that, let's see some places where they fall short:
+I love promises. It isn't a secret and I've said it [many](https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab), [many](https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452) times. They come in all asynchronous shapes and colors. But I think they could be better, so let's see some places where they fall short:
 
 
 
-### Parallel
+### Parallel resolution
 
 To run several promises at once you'll use `Promise.all()` quite too often:
 
@@ -33,7 +33,7 @@ const files = await files.map(file => readFile(file, 'utf-8'));
 
 
 
-### Opaque
+### Chaining operations
 
 The next issue is when you want to perform any operation on the promise value. You have to await for the whole thing to finish with `.then()` to perform the next operation:
 
@@ -62,7 +62,7 @@ value = value.filter(op2);
 value = await Promise.all(value.map(op3));
 ```
 
-It would be better if let the promise chain figure out those:
+It would be better if let the promise chain figure out those and worked as expected:
 
 ```js
 // Does NOT work

@@ -36,6 +36,11 @@
         padding: 0;
       }
 
+      .love {
+        text-align: center;
+        margin: 50px auto;
+      }
+
       comment-box h2 {
         margin: 0;
       }
@@ -93,8 +98,8 @@
         <a href="https:///francisco.io/blog/better-promises/">🕑 <time datetime="Thu Sep 20 2018 09:00:00 GMT+0900 (JST)">{loading...}</time></a>
       </div>
 
-      <p>I love promises. It isn&#39;t a secret and I&#39;ve said it <a href="https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab">many</a>, <a href="https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452">many</a> times. They come in all asynchronous shapes and colors. But the question always arises: could they be any better? To even pretend to answer that, let&#39;s see some places where they fall short:</p>
-<h3 id="parallel">Parallel</h3>
+      <p>I love promises. It isn&#39;t a secret and I&#39;ve said it <a href="https://medium.com/server-for-node-js/async-await-are-awesome-c0834cc09ab">many</a>, <a href="https://medium.com/server-for-node-js/servers-middleware-promises-41d82a184452">many</a> times. They come in all asynchronous shapes and colors. But I think they could be better, so let&#39;s see some places where they fall short:</p>
+<h3 id="parallel-resolution">Parallel resolution</h3>
 <p>To run several promises at once you&#39;ll use <code>Promise.all()</code> quite too often:</p>
 <pre><code class="language-js">// Load several websites at once
 const webs = await Promise.all(urls.map(url =&gt; got(url)));
@@ -105,7 +110,7 @@ const files = await Promise.all(files.map(file =&gt; readFile(file, &#39;utf-8&#
 <pre><code class="language-js">// Does NOT work :(
 const webs = await urls.map(url =&gt; got(url));
 const files = await files.map(file =&gt; readFile(file, &#39;utf-8&#39;));</code></pre>
-<h3 id="opaque">Opaque</h3>
+<h3 id="chaining-operations">Chaining operations</h3>
 <p>The next issue is when you want to perform any operation on the promise value. You have to await for the whole thing to finish with <code>.then()</code> to perform the next operation:</p>
 <pre><code class="language-js">// Get each line from a remote URL
 const lines = await fetch(...).then(res =&gt; res.text()).then(res =&gt; res.split(&#39;\n&#39;));</code></pre>
@@ -118,7 +123,7 @@ const lines = await fetch(...).text().split(&#39;\n&#39;);</code></pre>
 let value = await Promise.all(data.map(op1));
 value = value.filter(op2);
 value = await Promise.all(value.map(op3));</code></pre>
-<p>It would be better if let the promise chain figure out those:</p>
+<p>It would be better if let the promise chain figure out those and worked as expected:</p>
 <pre><code class="language-js">// Does NOT work
 const value = await data.map(op1).filter(op2).map(op3);</code></pre>
 <h2 id="magic-promises">Magic Promises</h2>
@@ -152,9 +157,11 @@ const files = Promise.all(readmes.map(read));</code></pre>
 <p>My initial experience by creating and using <code>magic-promises</code> has been great. There is still some things to do, like <code>.filter()</code> accepting promises that resolve to booleans, but that&#39;s for the next chapter.</p>
 
 
-      <a href="https://www.paypal.me/franciscopresencia/10">💙 💚 💛 💜</a>
+      <footer class="love">
+        <a href="https://www.paypal.me/franciscopresencia/10">💙 💚 💛 💜</a>
+      </footer>
 
-      <comment-box title=""></comment-box>
+      <comment-box class="border" title="" site="https://francisco.io/blog/better-promises"></comment-box>
 
       <script src="https://cdn.jsdelivr.net/npm/timeago.js/dist/timeago.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
