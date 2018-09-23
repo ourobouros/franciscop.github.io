@@ -35,7 +35,6 @@ const play = (() => {
     }
   };
 
-
   async function play (inst) {
     // if (!(this instanceof play)) {
     //   return new play(inst);
@@ -46,11 +45,6 @@ const play = (() => {
 
     base.append(`<play-control><span class="play">⏸</span></play-control>`);
     const control = base.find('play-control');
-    control.find('.play').on('click', e => {
-      u(e.currentTarget).html(base.hasClass('play') ? '⏵' : '⏸');
-      base.toggleClass('play');
-    });
-
     const commands = parse(text).map(item => {
       if (!base.find(`.${item.name}`).length) {
         control.before(`<play-window class="${item.name}"></play-window>`);
@@ -58,21 +52,36 @@ const play = (() => {
       control.append(`<span class="step">◌</span>`);
       return { ...item, element: base.find(`play-window.${item.name}`) };
     });
+    control.find('.play').on('click', e => {
+      u(e.currentTarget).html(base.hasClass('play') ? '⏵' : '⏸');
+      base.toggleClass('play');
+    });
+    control.find('.step').on('click', e => {
+      const i = u(e.currentTarget).parent().children().nodes.indexOf(e.currentTarget) - 1;
+      base.data('i', i);
+    });
 
-    for (const item of commands) {
-      const index = commands.indexOf(item);
-      u('play-control .step').each((el, i) => {
+    const loop = async () => {
+      const i = parseInt(base.data('i'), 10) || 0;
+      await play.wait(100);
+      if (!base.hasClass('play')) return loop();
+      if (i >= commands.length) return loop();
+      const item = commands[i];
+
+      u('play-control .step').each((el, index) => {
         //●◉◍○
         u(el).filter('.active').html('●');
         u(el).toggleClass('active', i === index);
         u(el).filter('.active').html('○');
       });
-      while (!base.hasClass('play')) {
-        await play.wait(100);
-      }
+
       await play[item.name](item);
-    }
-    base.find('.step').html('●');
+
+      await play.wait(100);
+      base.data('i', (parseInt(base.data('i'), 10) || 0) + 1);
+      loop();
+    };
+    loop();
   };
 
   play.terminal = async ({ element, command, content, extra }) => {
