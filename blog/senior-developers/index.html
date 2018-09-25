@@ -41,12 +41,26 @@
         margin: 50px auto;
       }
 
+      pre code {
+        background: transparent;
+        color: #fff;
+      }
+
       comment-box h2 {
         margin: 0;
       }
 
-      comment-box .add {
+      comment-box .add:first-child {
         margin-top: 0;
+        border-radius: .2em;
+      }
+
+      comment-box .add:last-child {
+        display: none;
+      }
+
+      comment-box .actual {
+        overflow-x: auto;
       }
 
       pre,
@@ -85,6 +99,7 @@
         vertical-align: text-top;
       }
 
+      pre,
       pre[class*="language-"] {
         border: none;
       }
