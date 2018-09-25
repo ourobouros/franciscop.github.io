@@ -1,5 +1,5 @@
 ---
-layout: post.hbs
+layout: blog.hbs
 title: A Javascript of two worlds
 description: an exploration on how Javascript world is dividing more and more
 time: 2018-09-25 23:00:00+09:00
