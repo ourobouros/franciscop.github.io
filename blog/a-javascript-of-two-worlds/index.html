@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/png" href="/img/logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="/assets/img/logo.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -18,17 +18,17 @@
     <meta name="twitter:title" content="A Javascript of two worlds - Francisco Presencia">
     <meta name="twitter:description" content="an exploration on how Javascript world is dividing more and more">
     <meta name="twitter:creator" content="@fpresencia">
-    <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
+    <meta name="twitter:image" content="https://francisco.io/assets/img/card_cta.png">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="A Javascript of two worlds - Francisco Presencia" />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https:///francisco.io/blog/a-javascript-of-two-worlds/" />
-    <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
+    <meta property="og:image" content="https://francisco.io/assets/img/card_cta.png" />
     <meta property="og:description" content="an exploration on how Javascript world is dividing more and more" />
     <meta property="og:site_name" content="Blog of Francisco Presencia" />
 
-    <link href="/style.min.css" rel="stylesheet">
+    <link href="/assets/style.min.css" rel="stylesheet">
     <style media="screen">
       h2, h3 {
         margin: 1.2em 0 -.3em;
@@ -44,7 +44,7 @@
     <main>
       <h1>A Javascript of two worlds</h1>
       <div class="meta">
-        <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
+        <a href="https://francisco.io/"><img class="logo" src="/assets/img/logo.png"> Francisco Presencia</a>
         <a href="https:///francisco.io/blog/a-javascript-of-two-worlds/">🕑 <time datetime="Thu Sep 27 2018 23:00:00 GMT+0900 (JST)">{loading...}</time></a>
       </div>
 
@@ -103,6 +103,17 @@
       <script src="https://comments.network/comments.js"></script>
       <script type="text/javascript">
         timeago().render(document.querySelectorAll('time'));
+      </script>
+
+      <script>
+        // Google Analytics
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-63739359-1', 'auto');
+        ga('send', 'pageview');
       </script>
     </main>
   </body>

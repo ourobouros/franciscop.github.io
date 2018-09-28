@@ -7,8 +7,8 @@ $picnic-grid-count: one two three four;
 $picnic-grid-part: full half third two-third fourth;
 $picnic-grid-offpart: none;
 
-@import 'node_modules/prismjs/themes/prism-okaidia';
-@import 'node_modules/picnic/src/picnic';
+@import './prism-okaidia';
+@import '../node_modules/picnic/src/picnic';
 
 // GLOBAL ELEMENTS
 

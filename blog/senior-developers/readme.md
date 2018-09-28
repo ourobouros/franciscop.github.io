@@ -1,5 +1,5 @@
 ---
-layout: blog.hbs
+layout: post.hbs
 title: Senior Developers
 description: My opinion about what I believe senior developers are; or are not
 date: 2018-09-24
