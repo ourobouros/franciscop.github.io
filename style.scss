@@ -1,4 +1,11 @@
-$picnic-grid-gutter: 30px !default;
+$picnic-grid-gutter: 30px;
+$picnic-grid-sizes: 500 600 700 800;
+// $picnic-grid-children: $picnic-grid-sizes;
+$picnic-grid-off: 500;
+$picnic-grid-count: one two three four;
+$picnic-grid-part: full half third two-third fourth;
+$picnic-grid-offpart: none;
+
 @import 'node_modules/prismjs/themes/prism-okaidia';
 @import 'node_modules/picnic/src/picnic';
 
