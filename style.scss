@@ -28,13 +28,41 @@ p {
   line-height: 1.4;
 }
 
+pre code {
+  background: transparent;
+  color: #fff;
+}
+
+pre,
+pre[class*="language-"] {
+  line-height: 1;
+  background: #272822;
+  margin: .8em -10px;
+  border-radius: 0;
+  padding: 10px;
+}
+
+@media (min-width: 500px) {
+  pre,
+  pre[class*="language-"] {
+    margin: .8em 0;
+    border-radius: .3em;
+    padding: 1em;
+  }
+}
+
+h1 + p, h2 + p, p {
+  margin: .8em 0;
+}
+
+pre,
+pre[class*="language-"] {
+  border: none;
+}
+
 h1 + p,
 h2 + p {
   margin: .4em 0 .9em;
-}
-
-.flex p {
-  margin: 0;
 }
 
 p br {
@@ -78,13 +106,56 @@ span[data-tooltip] {
   border-radius: 3px;
 }
 
+.love {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.meta {
+  margin-top: 10px;
+  color: #888;
+}
+
+.meta a {
+  margin-right: 10px;
+}
+
+.meta .logo {
+  width: 20px;
+  vertical-align: text-top;
+}
+
+.banner {
+  display: none;
+}
+
+.flex p {
+  margin: 0;
+}
+
+comment-box h2 {
+  margin: 0;
+}
+
+comment-box .add:first-child {
+  margin-top: 0;
+  border-radius: .2em;
+}
+
+comment-box .add:last-child {
+  display: none;
+}
+
+comment-box .actual {
+  overflow-x: auto;
+}
 
 
 
 
 // LINK RAINBOW
 a {
-  display: inline-block;
+  display: inline;
 }
 
 a:hover {

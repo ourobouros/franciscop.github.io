@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/img/logo.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Standard -->
+    <title>A Javascript of two worlds - Francisco Presencia</title>
+    <meta content="Blog, Francisco Presencia, Francisco, Presencia, Software, Programmer, Javascript, Node.js" name="keywords">
+    <meta content="an exploration on how Javascript world is dividing more and more" name="description">
+
+    <!-- Thanks https://moz.com/blog/meta-data-templates-123 -->
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fpresencia">
+    <meta name="twitter:title" content="A Javascript of two worlds - Francisco Presencia">
+    <meta name="twitter:description" content="an exploration on how Javascript world is dividing more and more">
+    <meta name="twitter:creator" content="@fpresencia">
+    <meta name="twitter:image" content="https://francisco.io/img/card_cta.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="A Javascript of two worlds - Francisco Presencia" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https:///francisco.io/blog/a-javascript-of-two-worlds/" />
+    <meta property="og:image" content="https://francisco.io/img/card_cta.png" />
+    <meta property="og:description" content="an exploration on how Javascript world is dividing more and more" />
+    <meta property="og:site_name" content="Blog of Francisco Presencia" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet" />
+    <link href="/style.min.css" rel="stylesheet">
+    <style media="screen">
+      h2, h3 {
+        margin: 1.2em 0 -.3em;
+        padding: 0;
+      }
+
+      h1 + p, h2 + p, p {
+        margin: .8em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>A Javascript of two worlds</h1>
+      <div class="meta">
+        <a href="https://francisco.io/"><img class="logo" src="/img/logo.png"> Francisco Presencia</a>
+        <a href="https:///francisco.io/blog/a-javascript-of-two-worlds/">🕑 <time datetime="Thu Sep 27 2018 23:00:00 GMT+0900 (JST)">{loading...}</time></a>
+      </div>
+
+      <p>I was quietly going on my things when the thought invaded me. It is <em>so nice</em> to write and publish small Javascript libraries in 2018. Or to explore other developer&#39;s amazing tools like <a href="https://github.com/sindresorhus/">Sindre Sorhus&#39;</a>.</p>
+<p>But it&#39;s also a very nice concept that I can pick up fully working environments to start a large application from scratch. With hundreds of tutorials about how to use them.</p>
+<p>However, and this is what this whole article is about, these are two fairly separated, well defined narratives. I believe they are growing further apart, making new developers very confused.</p>
+<h2 id="the-forces-at-play">The forces at play</h2>
+<p>My take of how we got here is that there are <strong>two forces</strong> pushing and enriching Javascript world:</p>
+<ul>
+<li><strong>Makers</strong>: hundreds of efficient packagers that build things at a rate that many consider impossible. Highly motivated, there are many individuals that contribute to Javascript. These are the crafters, the developers that make small and well-rounded utilities.</li>
+<li><strong>Companies</strong>: dozens of large companies make large tools to improve their workflow, deployments, etc. They initially came from the holes that the initial makers left, but now they change the way you even think about building applications.</li>
+</ul>
+<blockquote>
+<p>SMB and startups normally (but not always!) are too busy trying to make money and survive to be able to dedicate large resources for OSS.</p>
+</blockquote>
+<p>The main problem is that these two forces have wildly divergent motivations and goals, so the things they want or even expect from Javascript ecosystem varies a lot. But don&#39;t forget:</p>
+<ul>
+<li><strong>Hype train</strong>: Hacker News, Reddit, Blog posts (like this one), etc. You could probably find a softer name, but for me this is a great equalizer since everyone can get exposure.</li>
+</ul>
+<p>This is important because it makes small and large projects appear at the same level. A hacky, 3-hour project might get side by side with a mature, 1000-hour project.</p>
+<h3 id="companies-goals">Companies goals</h3>
+<p>Large companies like Facebook, Google, etc have very measurable primary goals when building software, normally marked by the economy:</p>
+<ul>
+<li><strong>Stability:</strong> since every error means from lost sales to lost customers, the code should be highly resilient. It must also support as many environments as possible and be well tested.</li>
+<li><strong>Scalability:</strong> there are several developers working on any given feature at once. This implies that both the people and the software must be able to grow and not overlap with each other.</li>
+<li><strong>Hype:</strong> being able to make the top of your class software is probably a very good strategy for hiring great developers. Adoption also helps with stability.</li>
+<li><strong>Security:</strong> A hole on any of these companies might mean millions are lost. The companies might need to review every dependency and license before using a library.</li>
+</ul>
+<p>While there are many more goals, I think these are the ones that are vastly more important for large companies than for individual makers.</p>
+<h3 id="makers-goals">Makers goals</h3>
+<p>Individual makers are normally more concern about using the tool than the tool itself, so understandably these are common goals:</p>
+<ul>
+<li><strong>Small:</strong> being individuals, the scope and complexity is fairly limited. Those rare larger tools become either the main focus or unmaintained at some point.</li>
+<li><strong>Low overhead:</strong> a single developer does not have time for expensive maintenance, testing, building, etc. Specially when the tools are the means to an end.</li>
+<li><strong>Experimental:</strong> many tools will come for the sake of trying a technology or while learning a new concept but stay there. That&#39;s cool, next one will be better.</li>
+<li><strong>Unsupported:</strong> issues pile up and there&#39;s nothing you can do about it. The main target of the code is yourself. While you try to help others it&#39;s not your responsibility as explained with the MIT.</li>
+</ul>
+<h2 id="divergence">Divergence</h2>
+<p><strong>Github going down</strong> or the whole <strong>leftpad</strong> ordeal is a catastrophe for a large corporation where hundreds of developer hours might get wasted. For a maker? Take a cup of tea, work on some long-needed docs, continue reading a book or have a stroll on the beach. It&#39;s not a big deal.</p>
+<p>Suddenly <strong>the back button stops working</strong>? Add a library that introduces more subtle bugs or reinvent the whole back button manually. There&#39;s no time for either from a maker perspective.</p>
+<p>The <strong>node_modules size</strong> is ridiculous for compliance and it gets specially bad when installing several large tools. But well-picked crafted tools will save hundreds of hours for the makers.</p>
+<p>Every time someone complains about Javascript, they are on one side looking at the other. I have very rarely seen a complain about modern Javascript that <em>really</em> takes into account these two sides. Javascript is not only enterprise software, but it is also not only hand-crafted sites. It is <strong>both</strong>.</p>
+<h2 id="reconciliation">Reconciliation</h2>
+<p>So how can these two worlds get closer together? How can large companies help proactive makers to make better software, and how can makers help companies make more approachable software?</p>
+<p>I don&#39;t even know if these are the right questions to be asking. But I will keep asking it, since it is important when considering what you want to do and Javascript&#39;s future. Please let me know your opinion on Hacker News:</p>
+
+
+      <footer class="love">
+        <a href="https://www.paypal.me/franciscopresencia/10">💙 💚 💛 💜</a>
+      </footer>
+
+      <comment-box class="border" title="" site="https://francisco.io/blog/a-javascript-of-two-worlds"></comment-box>
+
+      <script src="https://cdn.jsdelivr.net/npm/timeago.js/dist/timeago.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+      <script src="https://comments.network/comments.js"></script>
+      <script type="text/javascript">
+        timeago().render(document.querySelectorAll('time'));
+      </script>
+    </main>
+  </body>
+</html>
