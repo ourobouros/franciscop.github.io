@@ -37,6 +37,52 @@ p {
   line-height: 1.4;
 }
 
+table {
+  border: 1px solid #ccc;
+  margin: .8em -11px 1.5em;
+  border-width: 1px 0;
+  width: calc(100% + 20px);
+  overflow-x: auto;
+  display: block;
+
+  @media (min-width: 500px) {
+    margin: .8em 0 1.5em;
+    width: 100%;
+    border-width: 1px;
+  }
+
+  @media (min-width: 800px) {
+    margin: .8em 0 1.5em;
+  }
+}
+
+blockquote {
+  box-shadow: none;
+  background: #eee linear-gradient(160deg, #faf, #88f);
+  background-size: 10px;
+  background-repeat: no-repeat;
+  padding: 1px .6em;
+
+  p {
+    margin: .6em;
+  }
+}
+
+th {
+  background: none;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+  width: 100%;
+}
+
+td {
+  white-space: nowrap;
+}
+
+tr {
+  background: none!important;
+}
+
 pre code {
   background: transparent;
   color: #fff;
@@ -47,18 +93,16 @@ pre[class*="language-"] {
   line-height: 1;
   background: #272822;
   margin: .8em -10px;
-  border-radius: 0;
   padding: 10px;
-}
+  border-radius: 0;
 
-@media (min-width: 500px) {
-  pre,
-  pre[class*="language-"] {
+  @media (min-width: 500px) {
     margin: .8em 0;
     border-radius: .3em;
     padding: 1em;
   }
 }
+
 
 h1 + p, h2 + p, p {
   margin: .8em 0;
