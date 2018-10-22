@@ -92,4 +92,8 @@ The fact that this is possible opens up to a new world of dangers, and unlikely 
 
 Any solution at this stage might be worse than the problem, so my only recommendation for Github is to monitor transfers of repos with "high" star count for history changes and take manual action.
 
-Fortunately the value of Github stars is still fairly limited for this to be a valuable, but it seems like things might change in a future with too many repositories. Please let me know what you think:
+Fortunately the value of Github stars is still fairly limited for this to be a target now, but it seems like things might change in a future with too many repositories.
+
+Why don't you try the library and let me know what you think? Or explore my site and say hi:
+
+<a class="button" href="https://github.com/franciscop/brownies">Brownies</a> <a class="button" href="https://francisco.io/">Francisco's Website</a>
